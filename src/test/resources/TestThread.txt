@@ -1,0 +1,39 @@
+package org.light.framework.base;
+
+/**
+ * ����һ��thread�̶߳��󣬴��빦��������runnable��������
+ * 
+ * @author Administrator
+ * 
+ */
+public class TestThread {
+    public static void main(String[] args) {
+        /*//�����̣߳��������е�run����
+        Thread thread1 = new Thread() {
+            @Override
+            public void run() {
+                System.out.println(this.getName());
+            };
+        };
+        thread1.start();
+        
+        //�����̣߳�ͨ���̵߳�run������ȥ���ô��빦��runnable����
+        Thread thread2 = new Thread(new Runnable() {
+            public void run() {
+                System.out.println(Thread.currentThread().getName());
+            }
+        });
+        thread2.start();*/
+        
+        Thread thread3 = new Thread(new Runnable() {
+            public void run() {
+                System.out.println("thread1");
+            }
+        }) {
+            public void run() {
+                System.out.println("thread0");
+            };
+        };
+        thread3.start();
+    }
+}
