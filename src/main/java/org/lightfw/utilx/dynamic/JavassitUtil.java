@@ -88,13 +88,13 @@ public class JavassitUtil {
 
     /**
      * 替换方法体
-     * @param clazzName 类名，如：foo.Student
+     * @param className 类名，如：foo.Student
      * @param methodName 方法名
      * @param newMethodBody 新的方法体，如："System.out.println(\"this method is changed dynamically!\");"
      */
-    public static void replaceMethodBody(String clazzName, String methodName, String newMethodBody) {
+    public static void replaceMethodBody(String className, String methodName, String newMethodBody) {
         try {
-            CtClass clazz = ClassPool.getDefault().get(clazzName);
+            CtClass clazz = ClassPool.getDefault().get(className);
             CtMethod method = clazz.getDeclaredMethod(methodName);
             method.setBody(newMethodBody);
             clazz.toClass();
