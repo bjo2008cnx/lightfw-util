@@ -1,9 +1,7 @@
 package org.lightfw.util.ext.dynamic;
 
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,9 +42,11 @@ public class ReflectProxyUtil {
     }
 
     @SuppressWarnings("unchecked")
+    /**
+     * 创建类的Proxy
+     */
     public static <T> T createProxy(T object, InvocationHandler invocationHandler) {
         final ClassLoader classLoader = object.getClass().getClassLoader(); // NOPMD
         return (T) Proxy.newProxyInstance(classLoader, getInterfaces(object).toArray(new Class[0]), invocationHandler);
     }
-
 }
