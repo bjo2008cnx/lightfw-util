@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.lightfw.util.io.common.FileUtil;
 
 import java.io.File;
-import java.io.IOException;
 
 public class EncryptPropConfigurerTest {
 
@@ -14,7 +13,6 @@ public class EncryptPropConfigurerTest {
      * @param args
      */
     public static void main(String[] args) {
-
 
     }
 

@@ -9,6 +9,14 @@ import javassist.*;
  * @date 2016/12/5
  */
 public class JavassitUtil {
+
+    private static ClassPool classPool;
+
+    static {
+        classPool = ClassPool.getDefault();
+        classPool.insertClassPath(new ClassClassPath(JavassitUtil.class)); //主要用于web环境
+    }
+
     /**
      * 动态创建类
      *
@@ -88,8 +96,9 @@ public class JavassitUtil {
 
     /**
      * 替换方法体
-     * @param className 类名，如：foo.Student
-     * @param methodName 方法名
+     *
+     * @param className     类名，如：foo.Student
+     * @param methodName    方法名
      * @param newMethodBody 新的方法体，如："System.out.println(\"this method is changed dynamically!\");"
      */
     public static void replaceMethodBody(String className, String methodName, String newMethodBody) {
