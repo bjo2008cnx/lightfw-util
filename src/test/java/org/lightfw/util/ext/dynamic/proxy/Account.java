@@ -5,5 +5,5 @@ package org.lightfw.util.ext.dynamic.proxy;
  * @date 2016/12/7
  */
 public interface Account {
-    public void operation();
+    public String operation();
 }

@@ -6,7 +6,7 @@ package org.lightfw.util.ext.dynamic.proxy;
  */
 public class AccountImpl implements Account {
     @Override
-    public void operation(){
-        System.out.println("operation in class Account.");
+    public String operation(){
+        return "x";
     }
 }

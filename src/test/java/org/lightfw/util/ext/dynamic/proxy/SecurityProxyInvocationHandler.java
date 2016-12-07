@@ -11,9 +11,10 @@ public class SecurityProxyInvocationHandler implements InvocationHandler {
     }
 
     public Object invoke(Object object, Method method, Object[] arguments) throws Throwable {
+        String result = null;
         if (object instanceof Account && method.getName().equals("operation")) {
-            System.out.println("dynamically proxied operation");
+            result = "X";
         }
-        return method.invoke(proxyedObject, arguments);
+        return result + method.invoke(proxyedObject, arguments);
     }
 }
