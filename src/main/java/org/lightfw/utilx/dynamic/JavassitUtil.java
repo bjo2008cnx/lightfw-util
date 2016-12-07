@@ -85,4 +85,21 @@ public class JavassitUtil {
     public static CtField newIntField(String fieldName, CtClass clazz) {
         return newField("java.lang.Integer", fieldName, clazz);
     }
+
+    /**
+     * 替换方法体
+     * @param clazzName 类名，如：foo.Student
+     * @param methodName 方法名
+     * @param newMethodBody 新的方法体，如："System.out.println(\"this method is changed dynamically!\");"
+     */
+    public static void replaceMethodBody(String clazzName, String methodName, String newMethodBody) {
+        try {
+            CtClass clazz = ClassPool.getDefault().get(clazzName);
+            CtMethod method = clazz.getDeclaredMethod(methodName);
+            method.setBody(newMethodBody);
+            clazz.toClass();
+        } catch (NotFoundException | CannotCompileException e) {
+            e.printStackTrace();
+        }
+    }
 }
