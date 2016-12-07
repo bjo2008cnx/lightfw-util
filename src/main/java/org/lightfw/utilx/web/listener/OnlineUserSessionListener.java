@@ -5,7 +5,8 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
- * 统计当前在线人数
+ * 用于统计单个容器的在线人数
+ * Web容器在启动之后设置onlie_num属性，OnlineUserSessionListener在session建立时更新online_num
  */
 public class OnlineUserSessionListener implements HttpSessionListener {
 
