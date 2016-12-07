@@ -99,7 +99,7 @@ public class JavassitUtil {
             method.setBody(newMethodBody);
             clazz.toClass();
         } catch (NotFoundException | CannotCompileException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }
