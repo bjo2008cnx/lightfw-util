@@ -14,7 +14,7 @@ public class JavassitUtil {
 
     static {
         classPool = ClassPool.getDefault();
-        classPool.insertClassPath(new ClassClassPath(JavassitUtil.class)); //主要用于web环境
+        classPool.insertClassPath(new ClassClassPath(JavassitUtil.class)); //主要用于web环境，确保用户定义的类能够正确加载
     }
 
     /**
