@@ -103,7 +103,7 @@ public class JavassitUtil {
      */
     public static void replaceMethodBody(String className, String methodName, String newMethodBody) {
         try {
-            CtClass clazz = ClassPool.getDefault().get(className);
+            CtClass clazz = classPool.get(className);
             CtMethod method = clazz.getDeclaredMethod(methodName);
             method.setBody(newMethodBody);
             clazz.toClass();
