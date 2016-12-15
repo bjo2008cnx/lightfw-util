@@ -53,11 +53,38 @@ public class UrlUtil {
 
     // Regex patterns that matches URIs. See RFC 3986, appendix B
 
-    private static final Pattern URI_PATTERN = Pattern.compile("^(" + SCHEME_PATTERN + ")?" + "(//(" + USERINFO_PATTERN + "@)?" + HOST_PATTERN + "(:" + PORT_PATTERN +
+    private static final Pattern URI_PATTERN = Pattern.compile("^(" + SCHEME_PATTERN + ")?" + "(//(" + USERINFO_PATTERN + "@)?" + HOST_PATTERN + "(:" +
+            PORT_PATTERN +
             ")?" + ")?" + PATH_PATTERN + "(\\?" + QUERY_PATTERN + ")?" + "(#" + LAST_PATTERN + ")?");
 
-    private static final Pattern HTTP_URL_PATTERN = Pattern.compile('^' + HTTP_PATTERN + "(//(" + USERINFO_PATTERN + "@)?" + HOST_PATTERN + "(:" + PORT_PATTERN + ")?" + ")?" +
+    private static final Pattern HTTP_URL_PATTERN = Pattern.compile('^' + HTTP_PATTERN + "(//(" + USERINFO_PATTERN + "@)?" + HOST_PATTERN + "(:" +
+            PORT_PATTERN + ")?" + ")?" +
             PATH_PATTERN + "(\\?" + LAST_PATTERN + ")?");
+
+
+    /**
+     * 替换路径中的数字为*
+     * 例：
+     *
+     * @param uri
+     * @return
+     */
+    public static String replaceNumberToStar(String uri) {
+        StringBuilder builder = new StringBuilder();
+        String[] uriParts = uri.split("/");
+        System.out.println(uriParts.length);
+        for (String uriPart : uriParts) {
+            if (!"".equals(uriPart)) {
+                builder.append("/").append(isNumeric(uriPart) ? "*" : uriPart);
+            }
+        }
+        return builder.toString();
+    }
+
+    public static boolean isNumeric(String str) {
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        return pattern.matcher(str).matches();
+    }
 
     /**
      * Encodes single URI component.
@@ -120,18 +147,6 @@ public class UrlUtil {
     public static String encodeUserInfo(String userInfo, String encoding) {
         return encodeUriComponent(userInfo, encoding, URIPart.USER_INFO);
     }
-
-/*	/**
-     * Encodes the given URI authority with the given encoding.
-	 *
-
-	public static String encodeAuthority(String authority, String encoding) {
-		return encodeUriComponent(authority, encoding, URIPart.AUTHORITY);
-	}
-	public static String encodeAuthority(String authority) {
-		return encodeUriComponent(authority, JoddCore.encoding, URIPart.AUTHORITY);
-	}
-*/
 
     public static String encodeUserInfo(String userInfo) {
         return encodeUriComponent(userInfo, CharsetUtil.UTF_8, URIPart.USER_INFO);
@@ -277,8 +292,8 @@ public class UrlUtil {
         throw new IllegalArgumentException("Invalid HTTP URL: " + httpUrl);
     }
 
-    private static String encodeUriComponents(String scheme, String authority, String userInfo, String host,
-                                              String port, String path, String query, String fragment, String encoding) {
+    private static String encodeUriComponents(String scheme, String authority, String userInfo, String host, String port, String path, String query, String
+            fragment, String encoding) {
 
         StringBuilder sb = new StringBuilder();
 
@@ -718,4 +733,5 @@ public class UrlUtil {
         }
         return result;
     }
+
 }
