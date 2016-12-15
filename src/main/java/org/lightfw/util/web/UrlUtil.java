@@ -64,8 +64,7 @@ public class UrlUtil {
 
     /**
      * 替换路径中的数字为*
-     * 例：
-     *
+     * 例：/a/bc/-1/11112222333344455556666/test/-1/c =>/a/bc/X/X/test/X/c
      * @param uri
      * @return
      */
