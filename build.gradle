@@ -67,5 +67,7 @@ dependencies {
     compileOnly 'cglib:cglib:3.2.4'
 
     testCompile 'junit:junit:4.12'
+    testCompile 'com.google.guava:guava:18.0'
+    testCompile 'org.springframework:spring-beans:4.2.1.RELEASE'
 
 }
