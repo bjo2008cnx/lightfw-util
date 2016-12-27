@@ -66,6 +66,10 @@ dependencies {
     compileOnly 'javassist:javassist:3.12.0.GA'
     compileOnly 'cglib:cglib:3.2.4'
 
+    compile 'com.dianping.cat:cat-core:1.3.6-SNAPSHOT'
+    compile 'com.dianping.cat:cat-client:1.3.6-SNAPSHOT'
+
+    testCompile 'redis.clients:jedis:2.7.2'
     testCompile 'junit:junit:4.12'
     testCompile 'com.google.guava:guava:18.0'
     testCompile 'org.springframework:spring-beans:4.2.1.RELEASE'
