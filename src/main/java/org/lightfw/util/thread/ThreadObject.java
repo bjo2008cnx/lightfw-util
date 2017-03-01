@@ -6,20 +6,19 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * 线程对象, 写时加写锁，读时加读锁。加读锁之后可以读，但不可以写；加写锁时其他线程不可以读也不可以写
- *
  * @author Wangxm
  * @date 2016/5/26
  */
-public class ThreadObject {
+public class ThreadObject<T> {
     private ReadWriteLock lock = new ReentrantReadWriteLock();
-    private Object object;
+    private T object;
 
     /**
      * 写对象
      *
      * @param object
      */
-    public void write(Object object) {
+    public void write(T object) {
         Lock write = lock.writeLock();
         write.lock();
         try {
