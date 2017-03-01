@@ -1,4 +1,4 @@
-package org.lightfw.mock;
+package org.lightfw.utilt;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * redis 的简单测试工具类缺省适配器。
  */
-public class ReidsClientAdapter implements CacheClient {
+public class CacheClientAdapter implements CacheClient {
 
     private static final RuntimeException UNIMPLEMENTED_EX = new RuntimeException("unimplemented operation");
 

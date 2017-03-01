@@ -1,8 +1,8 @@
-package org.lightfw.mock;
+package org.lightfw.utilt;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-public class RedisMock extends ReidsClientAdapter {
+public class CacheMock extends CacheClientAdapter {
     private static Map map = new ConcurrentHashMap();
 
     @Override

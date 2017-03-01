@@ -1,4 +1,4 @@
-package org.lightfw.mock;
+package org.lightfw.utilt;
 
 import java.util.List;
 import java.util.Map;
