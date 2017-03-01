@@ -1,4 +1,4 @@
-package org.lightfw;
+package org.lightfw.common;
 
 import org.junit.Assert;
 import org.junit.Ignore;

@@ -1,4 +1,4 @@
-package org.lightfw;
+package org.lightfw.common;
 
 
 import org.lightfw.util.lang.DateUtil2;

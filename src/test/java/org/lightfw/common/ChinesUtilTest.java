@@ -1,4 +1,4 @@
-package org.lightfw;
+package org.lightfw.common;
 
 import junit.framework.TestCase;
 import org.lightfw.utilx.detector.ChinesUtil;

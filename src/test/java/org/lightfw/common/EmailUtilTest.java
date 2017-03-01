@@ -1,4 +1,4 @@
-package org.lightfw;
+package org.lightfw.common;
 
 import org.lightfw.utilx.ext.EmailUtil;
 import org.junit.Ignore;

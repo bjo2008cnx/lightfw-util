@@ -1,4 +1,4 @@
-package org.lightfw;
+package org.lightfw.common;
 
 import org.junit.Test;
 import org.lightfw.util.lang.RandomUtil;
