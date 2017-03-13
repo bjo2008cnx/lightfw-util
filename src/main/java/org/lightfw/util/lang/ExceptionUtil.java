@@ -25,7 +25,7 @@ public class ExceptionUtil {
      * @param rows 最长多少行
      * @return
      */
-    public static String getStackTrac(Throwable t, int rows) {
+    public static String getStackTrace(Throwable t, int rows) {
         StringBuilder result = new StringBuilder();
         Throwable currentE = t;
         int count = 0;
@@ -48,6 +48,5 @@ public class ExceptionUtil {
         }
         return result.toString();
     }
-
 
 }
