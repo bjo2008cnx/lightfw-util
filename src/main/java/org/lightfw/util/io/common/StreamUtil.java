@@ -21,7 +21,6 @@ public class StreamUtil {
         closeQuietly(closeables);
     }
 
-
     /**
      * 通用的关闭方法
      *
@@ -100,8 +99,21 @@ public class StreamUtil {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 写到流中
+     *
+     * @param content
+     * @param os
+     * @throws IOException
+     */
+    public static void write2Stream(String content, OutputStream os) throws IOException {
+        BufferedOutputStream out = new BufferedOutputStream(os);
+        out.write(content.getBytes());
+        out.write('\r');
+        out.flush();
     }
 }
