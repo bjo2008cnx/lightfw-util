@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-public class JsonUtil {
+public class FasterXMLJsonUtil {
 
     private static ObjectMapper mapper = null;
 
