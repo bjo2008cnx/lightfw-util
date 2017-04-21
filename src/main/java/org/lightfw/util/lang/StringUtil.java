@@ -518,8 +518,7 @@ public class StringUtil {
      * @param close 末字符串。
      * @return String 子字符串数组, 如果没有符合要求的，返回{@code null}。
      */
-    public static String[] substringsBetween(String str, String open,
-                                             String close) {
+    public static String[] substringsBetween(String str, String open, String close) {
         if (str == null || isEmpty(open) || isEmpty(close)) {
             return null;
         }
@@ -930,8 +929,7 @@ public class StringUtil {
             return false;
         }
         for (int i = 0; i < arrayString.length; i++) {
-            if (arrayString[i].equals(str))
-                return true;
+            if (arrayString[i].equals(str)) return true;
         }
         return false;
     }
@@ -955,6 +953,27 @@ public class StringUtil {
                 }
                 sb.append(arrayString[i]);
             }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 功能: 把new long[]{1L, 2L, 3L}转化为 "1,2,3"
+     *
+     * @param longs
+     * @param splitStr
+     * @return 如果longs为null,返回null
+     */
+    public static String join(long[] longs, String splitStr) {
+        StringBuilder sb = new StringBuilder();
+        if (longs == null || longs.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < longs.length; i++) {
+            if (sb.length() > 0) {
+                sb.append(splitStr);
+            }
+            sb.append(longs[i]);
         }
         return sb.toString();
     }
@@ -1399,8 +1418,7 @@ public class StringUtil {
         if (list != null) {
             for (Object o : list) {
                 String temp = o.toString();
-                if (temp.trim().length() > 0)
-                    result += (temp + symbol);
+                if (temp.trim().length() > 0) result += (temp + symbol);
             }
             if (result.length() > 1) {
                 result = result.substring(0, result.length() - 1);
