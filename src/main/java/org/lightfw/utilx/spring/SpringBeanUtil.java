@@ -18,11 +18,11 @@ import java.util.Map;
  * Bean实例工厂
  */
 @Log4j2
-public class BeanUtil {
+public class SpringBeanUtil {
 
     private static final String DEFAULT_FILE_NAME = "services.all.xml"; //TODO 参数传入
-    private static final String DEFAULT_CONTEXT = "default-context";  //TODO 参数传入
-    private static final String DEFAULT_DATA_SOURCE = "dataSource";  //TODO 参数传入
+    private static final String DEFAULT_CONTEXT = "default-context";
+    private static final String DEFAULT_DATA_SOURCE = "dataSource";
 
     /**
      * 全局单例的BeanFactory
@@ -234,7 +234,7 @@ public class BeanUtil {
      * @return
      */
     public static DataSource getDataSource() {
-        DataSource ds = (DataSource) BeanUtil.getBean(DEFAULT_DATA_SOURCE);
+        DataSource ds = (DataSource) SpringBeanUtil.getBean(DEFAULT_DATA_SOURCE);
         return ds;
     }
 
@@ -244,7 +244,7 @@ public class BeanUtil {
      * @return
      */
     public static Connection getConnection() {
-        DataSource ds = (DataSource) BeanUtil.getBean(DEFAULT_DATA_SOURCE);
+        DataSource ds = (DataSource) SpringBeanUtil.getBean(DEFAULT_DATA_SOURCE);
         Connection conn = null;
         try {
             conn = ds.getConnection();
@@ -261,7 +261,7 @@ public class BeanUtil {
      * @return
      */
     public static Map<String, String> getSQLMap(String beanName) {
-        Map<String, String> map = (Map<String, String>) BeanUtil.getBean(beanName);
+        Map<String, String> map = (Map<String, String>) SpringBeanUtil.getBean(beanName);
         return map;
     }
 
@@ -272,7 +272,7 @@ public class BeanUtil {
      * @return 键值对保存配置信息
      */
     public static Map<String, String> getMap(String beanName) {
-        Map<String, String> map = (Map<String, String>) BeanUtil.getBean(beanName);
+        Map<String, String> map = (Map<String, String>) SpringBeanUtil.getBean(beanName);
         return map;
     }
 

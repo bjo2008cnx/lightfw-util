@@ -8,7 +8,7 @@ import org.lightfw.util.text.StringExtUtil;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class BeanUtilTest extends TestCase {
+public class SpringBeanUtilTest extends TestCase {
 
     @Test
     public void testHasProperties() {
