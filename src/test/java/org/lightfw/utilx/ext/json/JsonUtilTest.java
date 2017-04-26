@@ -5,12 +5,14 @@ import org.lightfw.utilx.ext.JsonUtil;
 
 public class JsonUtilTest {
 
-    private static final String RULES = "{'bill':'order','rules':[{'type':'fixed','length':'2','value':'01'},{'type':'date','length':'6'},{'type':'seq'," +
-            "'length':'9'}," +
-            "{'type':'random','length':'2'}]}";
+    private static final String RULES = "{'bills':" +
+            "[{'bill':'order'," +
+            "'rules':[{'type':'fixed','length':'2','value':'01'},{'type':'date','length':'6'},{'type':'seq','length':'9'},{'type':'random','length':'2'}]}," +
+            "{'bill':'pay'," +
+            "'rules':[{'type':'fixed','length':'2','value':'02'},{'type':'date','length':'6'},{'type':'seq','length':'10'},{'type':'random','length':'2'}]}" +
+            "]}";
 
-    private static final String PAY = "[{'TYPE':'FIXED','LENGTH':'2','VALUE':'02'},{'TYPE':'DATE','LENGTH':'6'},{'TYPE':'SEQ','LENGTH':'10'}," +
-            "{'TYPE':'RANDOM','LENGTH':'2'}]";
+    private static final String pay = "";
 
     @Test
     public void testToJSONString() throws Exception {
@@ -19,8 +21,8 @@ public class JsonUtilTest {
 
     @Test
     public void testFromJson() throws Exception {
-        String str = RULES.replaceAll("'","\"");
-        BillNumRule json = JsonUtil.fromJson(str, BillNumRule.class);
+        String str = RULES.replaceAll("'", "\"");
+        BillNumRules json = JsonUtil.fromJson(str, BillNumRules.class);
         System.out.println(json);
     }
 }

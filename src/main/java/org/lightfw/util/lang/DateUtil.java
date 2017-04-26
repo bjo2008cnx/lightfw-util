@@ -10,8 +10,6 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-
 /**
  * 通用的日期, 时间处理.
  * 注意：Timestamp 是Date的子类，能接受Date参数的也可以接受Timestamp作为参数
@@ -19,7 +17,6 @@ import org.slf4j.Logger;
  * @author wangxm
  */
 public class DateUtil {
-    private static final Logger log = LogUtil.getLogger(DateUtil.class);
     /**
      * 一天的毫秒数
      */
@@ -59,6 +56,29 @@ public class DateUtil {
     }
 
     /**
+     * 根据时间长度获得时间
+     *
+     * @param date
+     * @return
+     */
+    public static String getDate(Date date, int length) {
+        DateFormat dateFormat = null;
+        if (length == 6) {
+            dateFormat = DateFormat.YYMMDD;
+        } else if (length == 8) {
+            dateFormat = DateFormat.YYYYMMDD;
+        } else if (length == 14) {
+            dateFormat = DateFormat.YYYYMMDDHHMMSS;
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat.getFormat());
+        return simpleDateFormat.format(date);
+    }
+
+    public static String getDate(int length) {
+        return getDate(new Date(), length);
+    }
+
+    /**
      * 字符串转时间
      *
      * @param dateStr
@@ -86,7 +106,6 @@ public class DateUtil {
         try {
             return simpleDateFormat.parse(dateStr);
         } catch (ParseException e) {
-            log.error("Fail to convert to date", e);
             return null;
         }
     }
@@ -232,11 +251,11 @@ public class DateUtil {
         strDate = strDate.replaceAll("'", "");
         if (strDate.indexOf("-") < 0) {
             if (strDate.length() >= 16) { //处理20100301235959
-                strDate = strDate.substring(0, 4) + "-" + strDate.substring(4, 6) + "-" + strDate.substring(6, 8)
-                        + " " + strDate.substring(8, 10) + ":" + strDate.substring(10, 12) + ":" + strDate.substring(12, 14);
+                strDate = strDate.substring(0, 4) + "-" + strDate.substring(4, 6) + "-" + strDate.substring(6, 8) + " " + strDate.substring(8, 10) + ":" +
+                        strDate.substring(10, 12) + ":" + strDate.substring(12, 14);
             } else if (strDate.length() >= 14) { //处理201003012359
-                strDate = strDate.substring(0, 4) + "-" + strDate.substring(4, 6) + "-" + strDate.substring(6, 8)
-                        + " " + strDate.substring(8, 10) + ":" + strDate.substring(10, 12) + ":00";
+                strDate = strDate.substring(0, 4) + "-" + strDate.substring(4, 6) + "-" + strDate.substring(6, 8) + " " + strDate.substring(8, 10) + ":" +
+                        strDate.substring(10, 12) + ":00";
             } else if (strDate.length() >= 8) { //处理20100301
                 strDate = strDate.substring(0, 4) + "-" + strDate.substring(4, 6) + "-" + strDate.substring(6, 8);
             }
@@ -244,7 +263,8 @@ public class DateUtil {
 
         //处理03-01-2010
         if (strDate.length() - strDate.lastIndexOf("-") == 4) {
-            strDate = strDate.substring(strDate.lastIndexOf("-") + 1) + "-" + strDate.substring(0, strDate.indexOf("-")) + "-" + strDate.substring(strDate.indexOf("-") + 1, strDate.lastIndexOf("-"));
+            strDate = strDate.substring(strDate.lastIndexOf("-") + 1) + "-" + strDate.substring(0, strDate.indexOf("-")) + "-" + strDate.substring(strDate
+                    .indexOf("-") + 1, strDate.lastIndexOf("-"));
         }
 
         if (strDate.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
@@ -278,7 +298,6 @@ public class DateUtil {
             }
             return sb.toString();
         } else {
-            log.error("Format Date (" + str + ") failed");
             return str;
         }
     }
