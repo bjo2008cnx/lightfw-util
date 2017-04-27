@@ -1,9 +1,7 @@
 package org.lightfw.util.validate;
 
-import com.google.common.annotations.GwtCompatible;
 import org.lightfw.util.lang.StringUtil;
 
-@GwtCompatible
 public class PreconditionUtil {
 
     private PreconditionUtil() {
