@@ -1,7 +1,7 @@
 package org.lightfw.util.ext.bean;
 
 import org.lightfw.util.collection.CollectionUtil;
-import org.lightfw.util.lang.Valid;
+import org.lightfw.util.validate.Valid;
 
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;

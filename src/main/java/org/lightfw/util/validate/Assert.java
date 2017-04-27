@@ -14,7 +14,7 @@
  * the License.
  */
 
-package org.lightfw.util.lang;
+package org.lightfw.util.validate;
 
 import org.lightfw.util.collection.CollectionUtil;
 import org.lightfw.util.collection.MapUtil;

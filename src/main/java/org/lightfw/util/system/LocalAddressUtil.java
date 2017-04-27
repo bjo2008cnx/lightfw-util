@@ -1,4 +1,4 @@
-package org.lightfw.util.net;
+package org.lightfw.util.system;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -8,7 +8,7 @@ import java.util.Enumeration;
 /**
  * 网络工具
  */
-public abstract class NetUtil {
+public abstract class LocalAddressUtil {
 
     /**
      * 预先加载

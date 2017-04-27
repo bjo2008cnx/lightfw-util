@@ -1,7 +1,7 @@
 package org.lightfw.util.ext.io;
 
 import org.lightfw.util.io.common.FileExtUtil;
-import org.lightfw.util.lang.Valid;
+import org.lightfw.util.validate.Valid;
 
 import java.io.*;
 import java.util.zip.ZipEntry;

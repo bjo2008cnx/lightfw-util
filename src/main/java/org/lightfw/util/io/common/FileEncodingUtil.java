@@ -1,6 +1,6 @@
 package org.lightfw.util.io.common;
 
-import org.lightfw.util.lang.Valid;
+import org.lightfw.util.validate.Valid;
 
 import java.io.*;
 import java.nio.charset.Charset;

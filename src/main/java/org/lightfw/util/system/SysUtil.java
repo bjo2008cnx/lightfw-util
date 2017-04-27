@@ -1,7 +1,8 @@
-package org.lightfw.util.lang;
+package org.lightfw.util.system;
 
 import com.sun.management.OperatingSystemMXBean;
 import org.lightfw.util.collection.PropertiesUtil;
+import org.lightfw.util.validate.Valid;
 
 import java.lang.management.ManagementFactory;
 import java.net.Inet4Address;

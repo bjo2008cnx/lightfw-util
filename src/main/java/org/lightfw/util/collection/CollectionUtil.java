@@ -3,7 +3,7 @@ package org.lightfw.util.collection;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import org.lightfw.constant.GlobalConstant;
-import org.lightfw.util.lang.Valid;
+import org.lightfw.util.validate.Valid;
 
 import javax.annotation.Nullable;
 import java.util.*;

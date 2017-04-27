@@ -1,4 +1,6 @@
-package org.lightfw.util.lang;
+package org.lightfw.util.system;
+
+import org.lightfw.util.lang.StringUtil;
 
 import java.io.IOException;
 

@@ -1,6 +1,6 @@
 package org.lightfw.util.ext.bean;
 
-import org.lightfw.util.lang.Valid;
+import org.lightfw.util.validate.Valid;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;

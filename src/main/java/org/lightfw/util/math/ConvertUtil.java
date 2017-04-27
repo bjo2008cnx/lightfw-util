@@ -1,6 +1,6 @@
 package org.lightfw.util.math;
 
-import org.lightfw.util.lang.Valid;
+import org.lightfw.util.validate.Valid;
 
 import java.io.ByteArrayOutputStream;
 

@@ -2,7 +2,7 @@ package org.lightfw.util.io.ftp;
 
 import lombok.extern.log4j.Log4j2;
 import org.lightfw.util.io.common.FileExtUtil;
-import org.lightfw.util.lang.Valid;
+import org.lightfw.util.validate.Valid;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;

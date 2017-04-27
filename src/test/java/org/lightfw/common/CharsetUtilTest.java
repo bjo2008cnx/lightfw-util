@@ -1,7 +1,6 @@
 package org.lightfw.common;
 
-import org.lightfw.util.text.StringExtUtil;
-import org.lightfw.util.lang.SysUtil;
+import org.lightfw.util.system.SysUtil;
 import org.junit.Test;
 import org.lightfw.util.text.CharsetUtil;
 

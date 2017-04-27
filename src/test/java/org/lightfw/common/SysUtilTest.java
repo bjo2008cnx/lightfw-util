@@ -1,6 +1,6 @@
 package org.lightfw.common;
 
-import org.lightfw.util.lang.SysUtil;
+import org.lightfw.util.system.SysUtil;
 
 public class SysUtilTest {
 

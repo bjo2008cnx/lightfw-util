@@ -1,6 +1,6 @@
 package org.lightfw.common;
 
-import org.lightfw.util.lang.Valid;
+import org.lightfw.util.validate.Valid;
 import junit.framework.TestCase;
 
 import java.util.HashMap;

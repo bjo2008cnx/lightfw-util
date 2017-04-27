@@ -1,7 +1,7 @@
 package org.lightfw.util.io.common;
 
 import org.lightfw.util.text.CharsetUtil;
-import org.lightfw.util.lang.SysUtil;
+import org.lightfw.util.system.SysUtil;
 
 import java.io.UnsupportedEncodingException;
 

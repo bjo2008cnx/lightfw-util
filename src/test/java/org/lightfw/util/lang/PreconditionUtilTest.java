@@ -2,6 +2,7 @@ package org.lightfw.util.lang;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.lightfw.util.validate.PreconditionUtil;
 
 public class PreconditionUtilTest {
 

@@ -1,4 +1,4 @@
-package org.lightfw.util.lang;
+package org.lightfw.util.validate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

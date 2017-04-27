@@ -2,13 +2,12 @@ package org.lightfw.util.io.common;
 
 import org.lightfw.util.ext.dynamic.RegUtil;
 import org.lightfw.util.ext.io.FileTypeImpl;
-import org.lightfw.util.lang.Valid;
+import org.lightfw.util.validate.Valid;
 import org.lightfw.util.sercurity.encrypt.Md5Util;
 import org.lightfw.utilx.detector.EncodingDetectUtil;
 
 import java.io.*;
 import java.net.FileNameMap;
-import java.net.MalformedURLException;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
