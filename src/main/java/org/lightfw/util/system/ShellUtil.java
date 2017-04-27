@@ -1,4 +1,4 @@
-package org.lightfw.util.ext.io;
+package org.lightfw.util.system;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.ByteStreams;

@@ -1,7 +1,7 @@
 package org.lightfw.common;
 
 import org.junit.Test;
-import org.lightfw.util.collection.PropertiesUtil;
+import org.lightfw.util.common.collection.PropertiesUtil;
 import test.TestUtil;
 
 import java.nio.charset.Charset;

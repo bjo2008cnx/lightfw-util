@@ -1,4 +1,4 @@
-package org.lightfw.util.collection;
+package org.lightfw.util.common.collection;
 
 import org.junit.Test;
 import org.lightfw.util.io.common.FileUtil;

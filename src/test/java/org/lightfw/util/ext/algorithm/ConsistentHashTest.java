@@ -2,7 +2,7 @@ package org.lightfw.util.ext.algorithm;
 
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
-import org.lightfw.util.collection.ListUtil;
+import org.lightfw.util.common.collection.ListUtil;
 import org.lightfw.utilx.bigdata.ConsistentHash;
 
 import java.util.List;
