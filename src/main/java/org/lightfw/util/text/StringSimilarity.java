@@ -1,7 +1,6 @@
 package org.lightfw.util.text;
 
-import org.lightfw.util.text.CharsetUtil;
-import org.lightfw.util.system.SysUtil;
+import org.lightfw.util.system.SysInfoUtil;
 
 import java.io.UnsupportedEncodingException;
 
@@ -138,7 +137,7 @@ public class StringSimilarity {
      */
     public static String simpleEncoding(String str) {
         try {
-            byte[] bs = str.getBytes(SysUtil.JVM_ENCODING);
+            byte[] bs = str.getBytes(SysInfoUtil.JVM_ENCODING);
             if (str.equals(new String(bs, CharsetUtil.UTF_8))) {
                 return CharsetUtil.UTF_8;
             }

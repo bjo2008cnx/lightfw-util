@@ -1,6 +1,6 @@
 package org.lightfw.common;
 
-import org.lightfw.util.system.SysUtil;
+import org.lightfw.util.system.SysInfoUtil;
 import org.lightfw.util.ext.io.FileZipUtil;
 import org.junit.Test;
 import test.TestUtil;
@@ -11,7 +11,7 @@ public class FileZipUtilTest {
 
     @Test
     public void testDeCompress() throws Exception {
-        String file = SysUtil.CURRENT_USER_DIR + "/src/test/java/model";
+        String file = SysInfoUtil.CURRENT_USER_DIR + "/src/test/java/model";
         String zipFile = TestUtil.path + "temp/test.zip";
         FileZipUtil.deCompress(new File(file), zipFile);
     }

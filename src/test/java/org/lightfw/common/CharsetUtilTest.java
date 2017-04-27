@@ -1,6 +1,6 @@
 package org.lightfw.common;
 
-import org.lightfw.util.system.SysUtil;
+import org.lightfw.util.system.SysInfoUtil;
 import org.junit.Test;
 import org.lightfw.util.text.CharsetUtil;
 
@@ -17,7 +17,7 @@ public class CharsetUtilTest {
         System.out.println("file.encoding=" + System.getProperty("file.encoding"));
         System.out.println("Default Charset=" + Charset.defaultCharset());
         System.out.println("Default Charset in Use=" + CharsetUtil.getDefaultCharSet());
-        System.out.println("JVM_ENCODING ->" + SysUtil.JVM_ENCODING);
+        System.out.println("JVM_ENCODING ->" + SysInfoUtil.JVM_ENCODING);
         String str = "中文的字符串,编码结果会应项目的编译和JVM的运行环境有所影响";
         String gbk = CharsetUtil.toGBK(str);
         System.out.println("转换成GBK码: " + gbk);
