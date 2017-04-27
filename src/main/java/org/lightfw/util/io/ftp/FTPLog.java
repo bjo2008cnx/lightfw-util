@@ -1,6 +1,6 @@
 package org.lightfw.util.io.ftp;
 
-import org.lightfw.util.lang.DateUtil2;
+import org.lightfw.util.date.DateUtil2;
 
 /**
  * Created by Administrator on 2015-04-08.

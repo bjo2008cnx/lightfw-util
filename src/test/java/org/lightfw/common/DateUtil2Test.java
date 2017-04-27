@@ -1,7 +1,7 @@
 package org.lightfw.common;
 
 
-import org.lightfw.util.lang.DateUtil2;
+import org.lightfw.util.date.DateUtil2;
 import org.junit.Before;
 import org.junit.Test;
 

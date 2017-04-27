@@ -1,6 +1,6 @@
 package org.lightfw.common;
 
-import org.lightfw.util.lang.DateUtil2;
+import org.lightfw.util.date.DateUtil2;
 
 import java.text.ParseException;
 import java.util.Date;

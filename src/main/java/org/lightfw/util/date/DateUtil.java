@@ -1,4 +1,4 @@
-package org.lightfw.util.lang;
+package org.lightfw.util.date;
 
 import java.sql.Timestamp;
 import java.text.ParseException;

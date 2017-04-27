@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import org.lightfw.util.lang.DateUtil;
+import org.lightfw.util.date.DateUtil;
 import org.lightfw.util.math.NumberUtil;
 
 public class TransformUtil {
