@@ -67,8 +67,8 @@ public abstract class NetUtil {
     public static String getLocalAddressParts() {
         String address = localAddress.getHostAddress();
         String[] parts = address.split("\\.");
-        String second = null;
-        String fourth = null;
+        String second;
+        String fourth;
         if (parts == null || parts.length == 0) {
             //under Wifi, ip is like:2001:0:9d38:6ab8:1444:650a:8b18:44a6
             String[] partsWifi = address.split(":");
@@ -78,6 +78,8 @@ public abstract class NetUtil {
             second = parts[1];
             fourth = parts[3];
         }
+        second = second.length() >= 3 ? second.substring(0, 2) : second;
+        fourth = fourth.length() >= 3 ? fourth.substring(0, 2) : fourth;
         return second + fourth;
     }
 }
