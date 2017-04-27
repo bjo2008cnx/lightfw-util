@@ -1,4 +1,4 @@
-package org.lightfw.util.ext.map;
+package org.lightfw.util.math;
 
 /**
  * 经纬度相关的一些操作
