@@ -1,14 +1,13 @@
 package org.lightfw.util.ext.structure;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.lightfw.util.lang.LogUtil;
-import org.slf4j.Logger;
-
+@Slf4j
 public final class BufferPool {
-    private static final Logger LOGGER = LogUtil.getLogger(BufferPool.class);
     private final int chunkSize;
     private final ByteBuffer[] items;
     private final ReentrantLock lock;
@@ -51,7 +50,7 @@ public final class BufferPool {
         }
         if (node == null) {
             ++newCount;
-            LOGGER.warn("pool is full ,allocate tempory buffer ,total alloccated times:"
+            log.warn("pool is full ,allocate tempory buffer ,total alloccated times:"
                     + newCount);
             return createTempBuffer(chunkSize);
         } else {
@@ -67,13 +66,13 @@ public final class BufferPool {
      */
     public void safeRecycle(ByteBuffer buffer) {
         checkValidBuffer(buffer);
-        final boolean debug = LOGGER.isDebugEnabled();
+        final boolean debug = log.isDebugEnabled();
         final ReentrantLock lock = this.lock;
         lock.lock();
         try {
             if (testIfDuplicate(buffer)) {
                 if (debug) {
-                    LOGGER.debug("already recycled buffer ");
+                    log.debug("already recycled buffer ");
                 }
                 return;
             }
@@ -89,7 +88,7 @@ public final class BufferPool {
             return;
         } else if (buffer.capacity() > chunkSize) {
             buffer.clear();
-            LOGGER.warn("cant' recycle  a buffer large than my pool chunksize "
+            log.warn("cant' recycle  a buffer large than my pool chunksize "
                     + buffer.capacity());
             return;
         }
@@ -110,7 +109,7 @@ public final class BufferPool {
                 insert(buffer);
 
             } else {
-                LOGGER.warn("can't recycle  buffer ,pool is full ");
+                log.warn("can't recycle  buffer ,pool is full ");
 
             }
         } finally {
@@ -162,7 +161,7 @@ public final class BufferPool {
         if (size <= this.chunkSize) {
             return allocate();
         } else {
-            LOGGER.warn("allocate buffer size large than default chunksize:"
+            log.warn("allocate buffer size large than default chunksize:"
                     + this.chunkSize + " he want " + size);
             return createTempBuffer(size);
         }

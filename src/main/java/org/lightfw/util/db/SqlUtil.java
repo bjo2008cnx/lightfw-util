@@ -1,4 +1,4 @@
-package org.lightfw.util.text;
+package org.lightfw.util.db;
 
 public class SqlUtil {
     /**

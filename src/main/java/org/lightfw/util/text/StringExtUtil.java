@@ -1,6 +1,5 @@
 package org.lightfw.util.text;
 
-import org.lightfw.util.io.common.StringImpl;
 import org.lightfw.util.lang.StringUtil;
 
 import java.text.DecimalFormat;
@@ -102,9 +101,9 @@ public class StringExtUtil {
         str1 = trimPunct(str1);
         str2 = trimPunct(str2);
         if (str1.length() > str2.length()) {
-            return StringImpl.SimilarityRatio(str1, str2);
+            return StringSimilarity.SimilarityRatio(str1, str2);
         } else {
-            return StringImpl.SimilarityRatio(str2, str1);
+            return StringSimilarity.SimilarityRatio(str2, str1);
         }
     }
 
@@ -115,9 +114,9 @@ public class StringExtUtil {
         str1 = trimPunct(str1);
         str2 = trimPunct(str2);
         if (str1.length() > str2.length()) {
-            return StringImpl.SimilarDegree(str1, str2);
+            return StringSimilarity.SimilarDegree(str1, str2);
         } else {
-            return StringImpl.SimilarDegree(str2, str1);
+            return StringSimilarity.SimilarDegree(str2, str1);
         }
     }
 
