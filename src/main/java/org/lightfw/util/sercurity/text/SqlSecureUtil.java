@@ -1,7 +1,7 @@
 package org.lightfw.util.sercurity.text;
 
 
-import org.lightfw.util.text.SqlUtil;
+import org.lightfw.util.db.SqlUtil;
 
 public class SqlSecureUtil {
 
