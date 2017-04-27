@@ -51,27 +51,31 @@ public class MetaDataUtil {
         if (pks.isEmpty()) {
             synchronized (MetaDataUtil.class) {
                 if (pks.isEmpty()) {
-                    ResultSet rs = null;
-                    try {
-                        DatabaseMetaData metadata = conn.getMetaData();
-                        rs = metadata.getTables(catalog, null, null, null);
-                        while (rs.next()) {
-                            String tableName = rs.getString(3);
-                            ResultSet rsPk = metadata.getPrimaryKeys(catalog, null, tableName);
-                            if (rsPk.next()) {
-                                pks.put(tableName, rsPk.getString(4));
-                            }
-                            JDBCUtil.close(rsPk);
-                        }
-                    } catch (SQLException e) {
-                        throw ExceptionUtil.transform(e);
-                    } finally {
-                        JDBCUtil.close(rs);
-                    }
+                    loadTableMeta(conn, catalog);
                 }
             }
         }
         return pks;
+    }
+
+    private static void loadTableMeta(Connection conn, String catalog) {
+        ResultSet rs = null;
+        try {
+            DatabaseMetaData metadata = conn.getMetaData();
+            rs = metadata.getTables(catalog, null, null, null);
+            while (rs.next()) {
+                String tableName = rs.getString(3);
+                ResultSet rsPk = metadata.getPrimaryKeys(catalog, null, tableName);
+                if (rsPk.next()) {
+                    pks.put(tableName, rsPk.getString(4));
+                }
+                JDBCUtil.close(rsPk);
+            }
+        } catch (SQLException e) {
+            throw ExceptionUtil.transform(e);
+        } finally {
+            JDBCUtil.close(rs);
+        }
     }
 
 }
