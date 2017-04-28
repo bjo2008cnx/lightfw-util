@@ -1,7 +1,7 @@
 package org.lightfw.common;
 
 import junit.framework.TestCase;
-import org.lightfw.utilx.detector.ChinesUtil;
+import org.lightfw.utilx.text.detector.ChinesUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.CharacterCodingException;

@@ -1,4 +1,4 @@
-package org.lightfw.utilx.detector;
+package org.lightfw.utilx.text.detector;
 
 
 import net.sourceforge.pinyin4j.PinyinHelper;

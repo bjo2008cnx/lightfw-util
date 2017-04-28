@@ -2,6 +2,7 @@ package org.lightfw.utilx.serializer;
 
 import de.ruedigermoeller.serialization.FSTObjectInput;
 import de.ruedigermoeller.serialization.FSTObjectOutput;
+import org.lightfw.util.io.common.StreamUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -11,7 +12,6 @@ import java.io.IOException;
  * 使用 FST 实现序列化
  */
 public class FSTSerializer implements ISerializer {
-
 
     public String name() {
         return "fst";
@@ -26,18 +26,13 @@ public class FSTSerializer implements ISerializer {
             fout.writeObject(obj);
             return out.toByteArray();
         } finally {
-            if (fout != null)
-                try {
-                    fout.close();
-                } catch (IOException e) {
-                }
+            StreamUtil.close(fout);
         }
     }
 
 
     public Object deserialize(byte[] bytes) throws IOException {
-        if (bytes == null || bytes.length == 0)
-            return null;
+        if (bytes == null || bytes.length == 0) return null;
         FSTObjectInput in = null;
         try {
             in = new FSTObjectInput(new ByteArrayInputStream(bytes));
@@ -45,11 +40,7 @@ public class FSTSerializer implements ISerializer {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
-            if (in != null)
-                try {
-                    in.close();
-                } catch (IOException e) {
-                }
+            StreamUtil.close(in);
         }
     }
 

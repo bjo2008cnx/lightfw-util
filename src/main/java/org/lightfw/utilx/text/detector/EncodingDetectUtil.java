@@ -1,11 +1,10 @@
-package org.lightfw.utilx.detector;
+package org.lightfw.utilx.text.detector;
 
 
 import org.mozilla.intl.chardet.nsDetector;
 import org.mozilla.intl.chardet.nsICharsetDetectionObserver;
 
 import java.io.*;
-import java.net.URL;
 
 /**
  * 文件相关的算法实现

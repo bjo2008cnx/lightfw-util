@@ -4,7 +4,7 @@ import org.lightfw.util.ext.dynamic.RegUtil;
 import org.lightfw.util.ext.io.FileTypeImpl;
 import org.lightfw.util.validate.Valid;
 import org.lightfw.util.sercurity.encrypt.Md5Util;
-import org.lightfw.utilx.detector.EncodingDetectUtil;
+import org.lightfw.utilx.text.detector.EncodingDetectUtil;
 
 import java.io.*;
 import java.net.FileNameMap;
