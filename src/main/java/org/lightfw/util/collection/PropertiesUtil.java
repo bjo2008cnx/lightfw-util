@@ -38,7 +38,7 @@ public class PropertiesUtil {
      * @param fullPath
      * @return
      */
-    public static Properties loadByLocal(String fullPath) {
+    public static Properties load(String fullPath) {
         Properties properties = new Properties();
         try {
             properties.load(new BufferedReader(new FileReader(fullPath)));
@@ -55,7 +55,7 @@ public class PropertiesUtil {
      * @param key key
      * @return 返回value
      */
-    public static String key(String key) {
+    public static String getSystemKey(String key) {
         return System.getProperty(key);
     }
 
@@ -65,7 +65,7 @@ public class PropertiesUtil {
      * @param filePath 属性文件
      * @param key      需要读取的属性
      */
-    public static String GetValueByKey(String filePath, String key) {
+    public static String get(String filePath, String key) {
         Properties pps = new Properties();
         try (InputStream in = new BufferedInputStream(new FileInputStream(filePath))) {
             pps.load(in);
@@ -82,7 +82,7 @@ public class PropertiesUtil {
      * @param filePath 读取的属性文件
      * @return 返回所有的属性 key:value<>key:value
      */
-    public static String GetAllProperties(String filePath) throws IOException {
+    public static String getAll(String filePath) throws IOException {
         Properties pps = new Properties();
         String str = "";
         try (InputStream in = new BufferedInputStream(new FileInputStream(filePath))) {
@@ -104,7 +104,7 @@ public class PropertiesUtil {
      * @param pKey     属性名称
      * @param pValue   属性值
      */
-    public static void WriteProperties(String filePath, String pKey, String pValue) throws IOException {
+    public static void write(String filePath, String pKey, String pValue) throws IOException {
         Properties props = new Properties();
 
         props.load(new FileInputStream(filePath));

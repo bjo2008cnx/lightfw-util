@@ -16,6 +16,16 @@ public class SystemUtil {
     }
 
     /**
+     * 从系统属性文件中获取相应的值
+     *
+     * @param key key
+     * @return 返回value
+     */
+    public static String getSystemKey(String key) {
+        return System.getProperty(key);
+    }
+
+    /**
      * 运行本地可执行文件
      *
      * @param command
