@@ -197,7 +197,7 @@ public class CollectionUtil {
     /**
      * 使用指定的Filter过滤集合
      */
-    public static <T> List<T> filter(List<T> list, ListFilter filter) {
+    public static <T> List<T> filter(List<T> list, Filters.ListFilter filter) {
         List result = new ArrayList();
         if (Valid.valid(list)) {
             for (T t : list) {
@@ -209,7 +209,7 @@ public class CollectionUtil {
         return result;
     }
 
-    public static <T> Set<T> filter(Set<T> set, SetFilter filter) {
+    public static <T> Set<T> filter(Set<T> set, Filters.SetFilter filter) {
         Set result = new HashSet();
         if (Valid.valid(set)) {
             for (T t : set) {
@@ -221,7 +221,7 @@ public class CollectionUtil {
         return result;
     }
 
-    public static <T> Queue filter(Queue<T> queue, QueueFilter filter) {
+    public static <T> Queue filter(Queue<T> queue, Filters.QueueFilter filter) {
         Queue result = new LinkedList();
         if (Valid.valid(queue)) {
             for (T t : queue) {
@@ -233,7 +233,7 @@ public class CollectionUtil {
         return result;
     }
 
-    public static <K, V> Map filter(Map<K, V> map, MapFilter filter) {
+    public static <K, V> Map filter(Map<K, V> map, Filters.MapFilter filter) {
         Map result = new HashMap();
         if (Valid.valid(map)) {
             for (Map.Entry<K, V> entry : map.entrySet()) {
