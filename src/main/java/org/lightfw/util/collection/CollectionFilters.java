@@ -4,7 +4,7 @@ package org.lightfw.util.collection;
  * @author Michael.Wang
  * @date 2017/4/28
  */
-public class Filters {
+public class CollectionFilters {
     /**
      * <h6>Description:List过滤接口<h6>
      * <p></p>
