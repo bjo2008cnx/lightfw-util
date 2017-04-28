@@ -1,4 +1,4 @@
-package org.lightfw.utilx.ext;
+package org.lightfw.utilx.text.transfer;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;

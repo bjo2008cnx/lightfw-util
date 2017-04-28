@@ -1,4 +1,4 @@
-package org.lightfw.utilx.ext;
+package org.lightfw.utilx.text.mail;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;

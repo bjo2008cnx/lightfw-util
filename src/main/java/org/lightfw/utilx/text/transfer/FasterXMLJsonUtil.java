@@ -1,4 +1,4 @@
-package org.lightfw.utilx.ext;
+package org.lightfw.utilx.text.transfer;
 
 
 import com.fasterxml.jackson.databind.DeserializationFeature;

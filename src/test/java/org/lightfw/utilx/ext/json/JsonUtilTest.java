@@ -1,7 +1,7 @@
 package org.lightfw.utilx.ext.json;
 
 import org.junit.Test;
-import org.lightfw.utilx.ext.JsonUtil;
+import org.lightfw.utilx.text.transfer.JsonUtil;
 
 public class JsonUtilTest {
 

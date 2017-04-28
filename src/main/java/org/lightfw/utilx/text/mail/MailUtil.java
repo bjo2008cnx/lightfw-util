@@ -1,4 +1,4 @@
-package org.lightfw.utilx.ext;
+package org.lightfw.utilx.text.mail;
 
 import org.lightfw.constant.GlobalConstant;
 import org.lightfw.util.lang.ExceptionUtil;

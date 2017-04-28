@@ -1,6 +1,6 @@
 package org.lightfw.common;
 
-import org.lightfw.utilx.ext.EmailUtil;
+import org.lightfw.utilx.text.mail.EmailUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 import test.TestUtil;

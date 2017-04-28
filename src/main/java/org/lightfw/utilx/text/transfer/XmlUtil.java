@@ -1,4 +1,4 @@
-package org.lightfw.utilx.ext;
+package org.lightfw.utilx.text.transfer;
 
 import org.dom4j.*;
 import org.dom4j.io.DocumentSource;
