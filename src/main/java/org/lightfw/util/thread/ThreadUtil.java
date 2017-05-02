@@ -28,6 +28,22 @@ public class ThreadUtil {
         }
     }
 
+    public static void sleepSeconds(int seconds) {
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        } catch (InterruptedException e) {
+            //do nothing
+        }
+    }
+
+    public static void sleepMinutes(int minutes) {
+        try {
+            TimeUnit.MINUTES.sleep(minutes);
+        } catch (InterruptedException e) {
+            //do nothing
+        }
+    }
+
     /**
      * 获取线程id和名称
      *
