@@ -21,15 +21,15 @@ public class SysInfoUtil {
     /**
      * JVM的版本
      */
-    public static final String JVM_VERSION = PropertiesUtil.key("java.version");
+    public static final String JVM_VERSION = PropertiesUtil.getSystemKey("java.version");
     /**
      * JVM的编码
      */
-    public static final String JVM_ENCODING = PropertiesUtil.key("file.encoding");
+    public static final String JVM_ENCODING = PropertiesUtil.getSystemKey("file.encoding");
     /**
      * JVM默认的临时目录
      */
-    public static final String JVM_TEMPDIR = PropertiesUtil.key("java.io.tmpdir");
+    public static final String JVM_TEMPDIR = PropertiesUtil.getSystemKey("java.io.tmpdir");
     public static final String HTTP_PROXY_HOST = "http.proxyHost";
     public static final String HTTP_PROXY_PORT = "http.proxyPort";
     ;
@@ -47,34 +47,34 @@ public class SysInfoUtil {
     /**
      * 主机架构
      */
-    public static String OS_ARCH = PropertiesUtil.key("os.arch");
+    public static String OS_ARCH = PropertiesUtil.getSystemKey("os.arch");
     /**
      * 主机类型
      */
-    public static String OS_NAME = PropertiesUtil.key("os.name");
+    public static String OS_NAME = PropertiesUtil.getSystemKey("os.name");
     /**
      * 主机类型版本
      */
-    public static String OS_VERSION = PropertiesUtil.key("os.version");
+    public static String OS_VERSION = PropertiesUtil.getSystemKey("os.version");
     /**
      * 操作系统类型
      */
-    public static String SUN_DESKTOP = PropertiesUtil.key("sun.desktop");
+    public static String SUN_DESKTOP = PropertiesUtil.getSystemKey("sun.desktop");
     /**
      * 当前用户
      */
-    public static String CURRENT_USER = PropertiesUtil.key("user.name");
+    public static String CURRENT_USER = PropertiesUtil.getSystemKey("user.name");
     /**
      * 当前用户的家目录
      */
-    public static String CURRENT_USER_HOME = PropertiesUtil.key("user.home");
+    public static String CURRENT_USER_HOME = PropertiesUtil.getSystemKey("user.home");
     /**
      * 当用用户的工作目录
      */
-    public static String CURRENT_USER_DIR = PropertiesUtil.key("user.dir");
-    public static String FILE_SEPARATOR = PropertiesUtil.key("file.separator");
-    public static String PATH_SEPARATOR = PropertiesUtil.key("path.separator");
-    public static String LINE_SEPARATOR = PropertiesUtil.key("line.separator");
+    public static String CURRENT_USER_DIR = PropertiesUtil.getSystemKey("user.dir");
+    public static String FILE_SEPARATOR = PropertiesUtil.getSystemKey("file.separator");
+    public static String PATH_SEPARATOR = PropertiesUtil.getSystemKey("path.separator");
+    public static String LINE_SEPARATOR = PropertiesUtil.getSystemKey("line.separator");
     /**
      * 总的物理内存
      */
