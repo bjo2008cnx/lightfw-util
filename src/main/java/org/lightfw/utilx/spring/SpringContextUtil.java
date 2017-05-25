@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContextAware;
 
 /**
  * 在spring的applicationContext.xml中增加以下定义
- * <bean id="springContextsUtil" class="org.lightfw.utilx.spring.SpringContextsUtil" ></bean>
+ * <bean id="springContextsUtil" class="org.lightfw.utilx.spring.SpringContextsUtil" />
  * 需要在Web容器中使用
  */
 public class SpringContextUtil implements ApplicationContextAware {

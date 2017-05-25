@@ -5,7 +5,6 @@ import com.google.common.collect.Iterators;
 import org.lightfw.constant.GlobalConstant;
 import org.lightfw.util.validate.Valid;
 
-import javax.annotation.Nullable;
 import java.util.*;
 
 /**
@@ -147,8 +146,7 @@ public class CollectionUtil {
      * @param <T> 元素类型
      * @return 集合中唯一的元素
      */
-    @Nullable
-    public static <T> T getOnlyElement(Collection<T> c, @Nullable T defaultValue) {
+    public static <T> T getOnlyElement(Collection<T> c,T defaultValue) {
         return Iterators.getOnlyElement(c.iterator(), defaultValue);
     }
 
@@ -197,7 +195,7 @@ public class CollectionUtil {
     /**
      * 使用指定的Filter过滤集合
      */
-    public static <T> List<T> filter(List<T> list, CollectionFilters.ListFilter filter) {
+    public static <T> List<T> filter(List<T> list, CollectionFilter filter) {
         List result = new ArrayList();
         if (Valid.valid(list)) {
             for (T t : list) {
@@ -209,7 +207,7 @@ public class CollectionUtil {
         return result;
     }
 
-    public static <T> Set<T> filter(Set<T> set, CollectionFilters.SetFilter filter) {
+    public static <T> Set<T> filter(Set<T> set, CollectionFilter filter) {
         Set result = new HashSet();
         if (Valid.valid(set)) {
             for (T t : set) {
@@ -221,7 +219,7 @@ public class CollectionUtil {
         return result;
     }
 
-    public static <T> Queue filter(Queue<T> queue, CollectionFilters.QueueFilter filter) {
+    public static <T> Queue filter(Queue<T> queue, CollectionFilter filter) {
         Queue result = new LinkedList();
         if (Valid.valid(queue)) {
             for (T t : queue) {
@@ -233,7 +231,7 @@ public class CollectionUtil {
         return result;
     }
 
-    public static <K, V> Map filter(Map<K, V> map, CollectionFilters.MapFilter filter) {
+    public static <K, V> Map filter(Map<K, V> map, CollectionFilter filter) {
         Map result = new HashMap();
         if (Valid.valid(map)) {
             for (Map.Entry<K, V> entry : map.entrySet()) {
@@ -391,5 +389,9 @@ public class CollectionUtil {
             }
         }
         return longs;
+    }
+
+    public interface CollectionFilter<T>{
+        boolean filter(T t);
     }
 }

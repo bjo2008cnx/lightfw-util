@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * 通用的日期, 时间处理.
  * 注意：Timestamp 是Date的子类，能接受Date参数的也可以接受Timestamp作为参数
  *
- * @author wangxm
+ * @author wangxma
  */
 public class DateUtil {
     /**
