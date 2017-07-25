@@ -1,5 +1,6 @@
 package org.lightfw.util.ext.dynamic.proxy;
 
+
 import lombok.Data;
 
 import java.sql.Timestamp;

@@ -1,6 +1,8 @@
 package org.lightfw.util.common.collection;
 
 import org.junit.Test;
+import org.lightfw.util.collection.CollectionUtil;
+import org.lightfw.util.collection.ListUtil;
 
 import java.util.Collection;
 

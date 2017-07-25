@@ -27,13 +27,13 @@ public class RandomUtilTest {
         System.out.println(RandomUtil.integer(0, 10));
         System.out.println(RandomUtil.number(10));
         System.out.println(RandomUtil.number(10));
-        System.out.println(RandomUtil.String(10));
+        System.out.println(RandomUtil.randomString(10));
         System.out.println(RandomUtil.mixString(10));
         System.out.println(RandomUtil.lowerString(10));
         System.out.println(RandomUtil.upperString(10));
         System.out.println(RandomUtil.zeroString(10));
         System.out.println(RandomUtil.toFixdLengthString(123, 10));
-        System.out.println(RandomUtil.toFixdLengthString(123L, 10));
+        System.out.println(RandomUtil.toFixdLengthString(123, 10));
         int[] in = {1, 2, 3, 4, 5, 6, 7};
         System.out.println(RandomUtil.getNotSimple(in, 3));
     }

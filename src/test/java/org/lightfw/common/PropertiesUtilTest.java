@@ -1,8 +1,7 @@
 package org.lightfw.common;
 
 import org.junit.Test;
-import org.lightfw.util.common.collection.PropertiesUtil;
-import test.TestUtil;
+import org.lightfw.util.collection.PropertiesUtil;
 
 import java.nio.charset.Charset;
 
@@ -22,20 +21,7 @@ public class PropertiesUtilTest {
     @Test
     public void testKey() throws Exception {
         System.out.println(System.getProperties());
-        System.out.println(PropertiesUtil.key("user.name"));
-        System.out.println(PropertiesUtil.key("file.encoding"));
-    }
-
-    @Test
-    public void testPro() throws Exception {
-        String path = TestUtil.path + "Test.properties";
-        System.out.println(PropertiesUtil.key("user.dir"));
-        System.out.println(PropertiesUtil.GetValueByKey(path, "test"));
-        System.out.println(PropertiesUtil.GetAllProperties(path));
-        PropertiesUtil.WriteProperties(path, "long", "212");
-        PropertiesUtil.WriteProperties(path, "test", "212");
-        PropertiesUtil.WriteProperties(path, "test2", "中文测试");
-        PropertiesUtil.WriteProperties(path, "test3", "中文测试1");
-        System.out.println(PropertiesUtil.GetAllProperties(path));
+        System.out.println(PropertiesUtil.getSystemKey("user.name"));
+        System.out.println(PropertiesUtil.getSystemKey("file.encoding"));
     }
 }

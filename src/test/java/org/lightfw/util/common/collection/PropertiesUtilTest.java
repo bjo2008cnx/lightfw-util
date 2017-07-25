@@ -1,6 +1,7 @@
 package org.lightfw.util.common.collection;
 
 import org.junit.Test;
+import org.lightfw.util.collection.PropertiesUtil;
 import org.lightfw.util.io.common.FileUtil;
 
 import java.io.File;
@@ -15,7 +16,7 @@ public class PropertiesUtilTest {
         String path = "e:/tmp/test.properties";
         File file = new File(path);
         FileUtil.write(file, "name=dashen\n".concat("age=88"), false);
-        Properties prop = PropertiesUtil.loadByLocal(path);
+        Properties prop = PropertiesUtil.load(path);
         assertEquals("dashen", prop.getProperty("name"));
         assertEquals("88", prop.getProperty("age"));
     }
