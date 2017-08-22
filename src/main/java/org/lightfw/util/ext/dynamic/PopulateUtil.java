@@ -87,10 +87,12 @@ public class PopulateUtil {
             field.setAccessible(true);
             try {
                 String fieldName = field.getName();
+                String propName = fieldName;
                 if (convertToCamel){
-                    fieldName= StringExtUtil.camelToUnderLine(fieldName);
+                    propName= StringExtUtil.camelToUnderLine(fieldName);
                 }
-                field.set(obj, map.get(fieldName));
+                Object value = map.get(propName);
+                field.set(obj, value);
             } catch (IllegalAccessException e) {
                 log.error("fail to set field", e);
             }

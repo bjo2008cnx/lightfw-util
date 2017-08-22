@@ -18,8 +18,8 @@ public class PopulateUtilTest {
     @Test
     public void map2Obj() throws Exception {
         Map map = new Properties();
-        map.put("appId", "1234");
-        map.put("toAuthUrl", "http://123.com");
+        map.put("app_id", "1234");
+        map.put("to_auth_url", "http://123.com");
         AuthConfig config = PopulateUtil.map2Obj(map, AuthConfig.class);
         Assert.assertEquals("1234", config.getAppId());
         Assert.assertEquals("http://123.com", config.getToAuthUrl());
