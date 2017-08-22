@@ -14,6 +14,11 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+task "mkdirs" << {
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+
 repositories {
     mavenLocal()
     mavenCentral()

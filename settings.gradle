@@ -1,0 +1,2 @@
+rootProject.name = 'lightfw-util'
+include 'light-tool','light-util','light-util-extend','light-util-test'
