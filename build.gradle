@@ -1,12 +1,16 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'  // Eclipse users only
-apply plugin: 'maven'
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'  // Eclipse users only
+    apply plugin: 'maven'
 
-group = 'org.lightfw'
-version = '1.0-SNAPSHOT'
+    group = 'org.lightfw'
+    version = '1.0-SNAPSHOT'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
+subprojects {
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+}
 
 description = 'lightfw-utils'
 
@@ -22,4 +26,6 @@ repositories {
 configurations {
     all*.exclude group: 'log4j', module: 'log4j'
 }
+
+
 

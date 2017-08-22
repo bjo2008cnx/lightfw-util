@@ -1,22 +1,8 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'  // Eclipse users only
-apply plugin: 'maven'
 
-group = 'org.lightfw.util.extend'
-version = '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-
-description = 'lightfw-utils'
+description = 'lightfw-util-extend'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
-}
-
-task "mkdirs" << {
-    sourceSets*.java.srcDirs*.each { it.mkdirs() }
-    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
 }
 
 repositories {

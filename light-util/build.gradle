@@ -1,22 +1,8 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'  // Eclipse users only
-apply plugin: 'maven'
-
-group = 'org.lightfw.util'
-version = '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
 
 description = 'light-util'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
-}
-
-task "mkdirs" << {
-    sourceSets*.java.srcDirs*.each { it.mkdirs() }
-    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
 }
 
 repositories {
@@ -71,5 +57,14 @@ dependencies {
     compileOnly 'redis.clients:jedis:2.7.2'
     compileOnly 'org.springframework:spring-beans:4.2.1.RELEASE'
     compileOnly 'org.apache.httpcomponents:httpclient:4.3.4'
+
+    compileOnly 'org.apache.logging.log4j:log4j-api:2.0-beta9'
+    compileOnly 'org.apache.logging.log4j:log4j-core:2.0-beta9'
+    compileOnly 'org.apache.logging.log4j:log4j-jcl:2.0-beta9'
+    compileOnly 'org.apache.logging.log4j:log4j-1.2-api:2.0-beta9'
+    compileOnly 'org.apache.logging.log4j:log4j-slf4j-impl:2.0-beta9'
+
     testCompile 'junit:junit:4.12'
+    
+
 }
