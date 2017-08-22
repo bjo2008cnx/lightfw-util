@@ -1,7 +1,5 @@
 package org.lightfw.util.lang;
 
-import com.google.common.base.Objects;
-
 /**
  * 对象工具
  *
@@ -43,12 +41,12 @@ public class ObjectUtil {
      * Objects.equal("a", null); // returns false
      * Objects.equal(null, null); // returns true
      *
-     * @param leftObject
-     * @param rightobject
+     * @param a
+     * @param b
      * @return
      */
-    public static boolean equal(Object leftObject, Object rightobject) {
-        return Objects.equal(leftObject, rightobject);
+    public static boolean equal(Object a, Object b) {
+        return a == b || a != null && a.equals(b);
     }
 
     /**
