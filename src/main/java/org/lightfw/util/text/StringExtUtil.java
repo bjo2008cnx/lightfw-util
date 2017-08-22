@@ -3,11 +3,23 @@ package org.lightfw.util.text;
 import org.lightfw.util.lang.StringUtil;
 
 import java.text.DecimalFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 一些非通用的字符串处理
  */
 public class StringExtUtil {
+
+    /**
+     * 用于驼峰转下划线
+     */
+    private static Pattern linePattern = Pattern.compile("_(\\w)");
+
+    /**
+     * 用于驼峰转下划线
+     */
+    private static Pattern humpPattern = Pattern.compile("[A-Z]");
 
     /**
      * 功能：将半角的符号转换成全角符号.(即英文字符转中文字符)
@@ -17,13 +29,9 @@ public class StringExtUtil {
      */
     public static String convertToFull(String str) {
         String source = "1234567890!@#$%^&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_=+\\|[];:'\",<.>/?";
-        String[] decode = {"１", "２", "３", "４", "５", "６", "７", "８", "９", "０",
-                "！", "＠", "＃", "＄", "％", "︿", "＆", "＊", "（", "）", "ａ", "ｂ",
-                "ｃ", "ｄ", "ｅ", "ｆ", "ｇ", "ｈ", "ｉ", "ｊ", "ｋ", "ｌ", "ｍ", "ｎ",
-                "ｏ", "ｐ", "ｑ", "ｒ", "ｓ", "ｔ", "ｕ", "ｖ", "ｗ", "ｘ", "ｙ", "ｚ",
-                "Ａ", "Ｂ", "Ｃ", "Ｄ", "Ｅ", "Ｆ", "Ｇ", "Ｈ", "Ｉ", "Ｊ", "Ｋ", "Ｌ",
-                "Ｍ", "Ｎ", "Ｏ", "Ｐ", "Ｑ", "Ｒ", "Ｓ", "Ｔ", "Ｕ", "Ｖ", "Ｗ", "Ｘ",
-                "Ｙ", "Ｚ", "－", "＿", "＝", "＋", "＼", "｜", "【", "】", "；", "：",
+        String[] decode = {"１", "２", "３", "４", "５", "６", "７", "８", "９", "０", "！", "＠", "＃", "＄", "％", "︿", "＆", "＊", "（", "）", "ａ", "ｂ", "ｃ", "ｄ", "ｅ", "ｆ",
+                "ｇ", "ｈ", "ｉ", "ｊ", "ｋ", "ｌ", "ｍ", "ｎ", "ｏ", "ｐ", "ｑ", "ｒ", "ｓ", "ｔ", "ｕ", "ｖ", "ｗ", "ｘ", "ｙ", "ｚ", "Ａ", "Ｂ", "Ｃ", "Ｄ", "Ｅ", "Ｆ", "Ｇ", "Ｈ",
+                "Ｉ", "Ｊ", "Ｋ", "Ｌ", "Ｍ", "Ｎ", "Ｏ", "Ｐ", "Ｑ", "Ｒ", "Ｓ", "Ｔ", "Ｕ", "Ｖ", "Ｗ", "Ｘ", "Ｙ", "Ｚ", "－", "＿", "＝", "＋", "＼", "｜", "【", "】", "；", "：",
                 "'", "\"", "，", "〈", "。", "〉", "／", "？"};
         String result = "";
         for (int i = 0; i < str.length(); i++) {
@@ -155,7 +163,7 @@ public class StringExtUtil {
             return "";
         }
         return str; //TODO
-       // return str.replaceAll("[\\pP\\p{Punct}]", "");
+        // return str.replaceAll("[\\pP\\p{Punct}]", "");
     }
 
     /**
@@ -214,6 +222,40 @@ public class StringExtUtil {
     public static String formatDouble(double f, String format) {
         DecimalFormat df = new DecimalFormat(format);
         return df.format(f);
+    }
+
+    /**
+     * 下划线转驼峰
+     */
+    public static String underLineToCamel(String str) {
+        str = str.toLowerCase();
+        Matcher matcher = linePattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+    /**
+     * 驼峰转下划线(简单写法，效率低于{@link #camelToUnderLine(String)})
+     */
+    public static String camelToUnderLineSimple(String str) {
+        return str.replaceAll("[A-Z]", "_$0").toLowerCase();
+    }
+
+    /**
+     * 驼峰转下划线,效率比上面高
+     */
+    public static String camelToUnderLine(String str) {
+        Matcher matcher = humpPattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, "_" + matcher.group(0).toLowerCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 
 }

@@ -10,10 +10,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 统计文件数量
  */
-public class FileCountTool {
+        public class FileCountTool {
 
-    public static void main(String[] args) {
-        File file = new File("E:\\codes\\o2o\\o2o-mgr\\src\\main\\java\\com\\weimob\\o2o\\mgr");
+            public static void main(String[] args) {
+        File file = new File("E:\\codes\\o2o\\");
         File[] files = file.listFiles();
         Map<AtomicInteger,String> map = new TreeMap(
               new Comparator<AtomicInteger>() {
