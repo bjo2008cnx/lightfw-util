@@ -1,8 +1,8 @@
 package org.lightfw.util.ext.dynamic;
 
 import lombok.extern.log4j.Log4j2;
-import org.lightfw.util.io.common.FileExtUtil;
 import org.lightfw.util.io.common.FilePathUtil;
+import org.lightfw.util.io.common.FileUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -267,7 +267,7 @@ public class ClassUtil {
      */
     public static List<String> getClassNameByFile(String filePath, boolean childPackage) {
         List<String> myClassName = new ArrayList<>();
-        List<File> files = FileExtUtil.listFile(filePath, childPackage);
+        List<File> files = FileUtil.listFile(filePath, childPackage);
         for (File file : files) {
             if (file.getName().endsWith(".class")) {
                 String childFilePath = file.getPath();

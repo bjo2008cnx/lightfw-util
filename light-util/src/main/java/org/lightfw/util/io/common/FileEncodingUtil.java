@@ -55,8 +55,7 @@ public class FileEncodingUtil {
      */
     public static void convert(File file, String fromCharsetName, String toCharsetName, FilenameFilter filter) {
         if (file.isDirectory()) {
-            List<File> list = Valid.valid(filter) ? FileExtUtil.listFileFilter(file, filter) :
-                    FileExtUtil.listFile(file);
+            List<File> list = Valid.valid(filter) ? FileUtil.listFileFilter(file, filter) : FileUtil.listFile(file);
             if (Valid.valid(list)) {
                 for (File f : list) {
                     convert(f, fromCharsetName, toCharsetName, filter);
@@ -81,9 +80,7 @@ public class FileEncodingUtil {
         if (!Charset.isSupported(fromCharsetName)) {
             throw new UnsupportedCharsetException(fromCharsetName);
         }
-        try (InputStream inputStream = new FileInputStream(file);
-             InputStreamReader reader = new InputStreamReader(inputStream, fromCharsetName)
-        ) {
+        try (InputStream inputStream = new FileInputStream(file); InputStreamReader reader = new InputStreamReader(inputStream, fromCharsetName)) {
             char[] chs = new char[(int) file.length()];
             reader.read(chs);
             str = new String(chs).trim();

@@ -9,7 +9,6 @@ import org.lightfw.util.ext.io.FileTypeImpl;
 import org.lightfw.util.lang.ExceptionUtil;
 import org.lightfw.util.validate.Valid;
 import org.lightfw.util.sercurity.encrypt.Md5Util;
-import org.lightfw.utilx.text.detector.EncodingDetectUtil;
 
 import java.io.*;
 import java.net.FileNameMap;
@@ -414,22 +413,6 @@ public class FileUtil {
             e.printStackTrace();
         }
         return false;
-    }
-
-
-    /**
-     * 利用简单的文件头字节特征探测文件编码
-     *
-     * @param file 需要处理的文件
-     * @return UTF-8 Unicode UTF-16BE GBK
-     */
-    public static String simpleEncoding(String file) {
-        try {
-            return EncodingDetectUtil.detectEncoding(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**

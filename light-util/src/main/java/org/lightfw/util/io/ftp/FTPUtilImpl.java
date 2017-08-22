@@ -2,6 +2,7 @@ package org.lightfw.util.io.ftp;
 
 import lombok.extern.log4j.Log4j2;
 import org.lightfw.util.io.common.FileExtUtil;
+import org.lightfw.util.io.common.FileUtil;
 import org.lightfw.util.validate.Valid;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -94,7 +95,7 @@ public class FTPUtilImpl implements FTPUtil {
     @Override
     public boolean downLoad(String fileName) {
         String localfileName = vo.getLocalDir() + File.separator + fileName;
-        FileExtUtil.createFiles(localfileName);
+        FileUtil.createFiles(localfileName);
         OutputStream out = null;
         try {
             out = new FileOutputStream(localfileName, true);
@@ -190,7 +191,7 @@ public class FTPUtilImpl implements FTPUtil {
 
     @Override
     public boolean putDir(File file, String remoteDir) {
-        List<File> list = FileExtUtil.listFile(file);
+        List<File> list = FileUtil.listFile(file);
         for (File f : list) {
             String name = f.getAbsolutePath();
             name = name.substring(name.indexOf(file.getName())).replaceAll("\\\\", "/");

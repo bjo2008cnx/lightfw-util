@@ -1,16 +1,11 @@
 package org.lightfw.util.io.common;
 
-import org.lightfw.util.ext.dynamic.RegUtil;
 import org.lightfw.util.ext.io.FileTypeImpl;
-import org.lightfw.util.validate.Valid;
 import org.lightfw.util.sercurity.encrypt.Md5Util;
-import org.lightfw.utilx.text.detector.EncodingDetectUtil;
 
 import java.io.*;
 import java.net.FileNameMap;
 import java.net.URLConnection;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -296,63 +291,6 @@ public class FileExtUtil {
 
 
     /**
-     * 复制文件
-     *
-     * @param resourcePath 源文件
-     * @param targetPath   目标文件
-     * @return 是否成功
-     */
-    public static boolean copy(String resourcePath, String targetPath) {
-        File file = new File(resourcePath);
-        return copy(file, targetPath);
-    }
-
-    /**
-     * 复制文件
-     * 通过该方式复制文件文件越大速度越是明显
-     *
-     * @param file       需要处理的文件
-     * @param targetFile 目标文件
-     * @return 是否成功
-     */
-    public static boolean copy(File file, String targetFile) {
-        try (
-                FileInputStream fin = new FileInputStream(file);
-                FileOutputStream fout = new FileOutputStream(new File(targetFile))
-        ) {
-            FileChannel in = fin.getChannel();
-            FileChannel out = fout.getChannel();
-            //设定缓冲区
-            ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
-            while (in.read(buffer) != -1) {
-                //准备写入，防止其他读取，锁住文件
-                buffer.flip();
-                out.write(buffer);
-                //准备读取。将缓冲区清理完毕，移动文件内部指针
-                buffer.clear();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    /**
-     * 利用简单的文件头字节特征探测文件编码
-     *
-     * @param file 需要处理的文件
-     * @return UTF-8 Unicode UTF-16BE GBK
-     */
-    public static String simpleEncoding(String file) {
-        try {
-            return EncodingDetectUtil.detectEncoding(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
      * 创建多级目录
      *
      * @param paths 需要创建的目录
@@ -364,53 +302,12 @@ public class FileExtUtil {
     }
 
     /**
-     * 创建文件支持多级目录
-     *
-     * @param filePath 需要创建的文件
-     * @return 是否成功
-     */
-    public static boolean createFiles(String filePath) {
-        File file = new File(filePath);
-        File dir = file.getParentFile();
-        if (!dir.exists()) {
-            if (dir.mkdirs()) {
-                try {
-                    return file.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
      * 删除一个文件
      *
      * @param file 需要处理的文件
      * @return 是否成功
      */
     public static boolean deleteFile(File file) {
-        return file.delete();
-    }
-
-    /**
-     * 删除一个目录
-     *
-     * @param file 需要处理的文件
-     * @return 是否成功
-     */
-    public static boolean deleteDir(File file) {
-        List<File> files = listFileAll(file);
-        if (Valid.valid(files)) {
-            for (File f : files) {
-                if (f.isDirectory()) {
-                    deleteDir(f);
-                } else {
-                    deleteFile(f);
-                }
-            }
-        }
         return file.delete();
     }
 
@@ -424,236 +321,6 @@ public class FileExtUtil {
     public static boolean deleteBigFile(File file) {
         return FileUtil.cleanFile(file) && file.delete();
     }
-
-
-    /**
-     * 复制目录
-     *
-     * @param filePath   需要处理的文件
-     * @param targetPath 目标文件
-     */
-    public static void copyDir(String filePath, String targetPath) {
-        File file = new File(filePath);
-        copyDir(file, targetPath);
-    }
-
-    /**
-     * 复制目录
-     *
-     * @param filePath   需要处理的文件
-     * @param targetPath 目标文件
-     */
-    public static void copyDir(File filePath, String targetPath) {
-        File targetFile = new File(targetPath);
-        if (!targetFile.exists()) {
-            createPaths(targetPath);
-        }
-        File[] files = filePath.listFiles();
-        if (Valid.valid(files)) {
-            for (File file : files) {
-                String path = file.getName();
-                if (file.isDirectory()) {
-                    copyDir(file, targetPath + "/" + path);
-                } else {
-                    copy(file, targetPath + "/" + path);
-                }
-            }
-        }
-    }
-
-    /**
-     * 罗列指定路径下的全部文件
-     *
-     * @param path 需要处理的文件
-     * @return 包含所有文件的的list
-     */
-    public static List<File> listFile(String path) {
-        File file = new File(path);
-        return listFile(file);
-    }
-
-    /**
-     * 罗列指定路径下的全部文件
-     *
-     * @param path  需要处理的文件
-     * @param child 是否罗列子文件
-     * @return 包含所有文件的的list
-     */
-    public static List<File> listFile(String path, boolean child) {
-        return listFile(new File(path), child);
-    }
-
-
-    /**
-     * 罗列指定路径下的全部文件
-     *
-     * @param path 需要处理的文件
-     * @return 返回文件列表
-     */
-    public static List<File> listFile(File path) {
-        List<File> list = new ArrayList<>();
-        File[] files = path.listFiles();
-        if (Valid.valid(files)) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    list.addAll(listFile(file));
-                } else {
-                    list.add(file);
-                }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * 罗列指定路径下的全部文件
-     *
-     * @param path  指定的路径
-     * @param child 是否罗列子目录
-     * @return
-     */
-    public static List<File> listFile(File path, boolean child) {
-        List<File> list = new ArrayList<>();
-        File[] files = path.listFiles();
-        if (Valid.valid(files)) {
-            for (File file : files) {
-                if (child && file.isDirectory()) {
-                    list.addAll(listFile(file));
-                } else {
-                    list.add(file);
-                }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * 罗列指定路径下的全部文件包括文件夹
-     *
-     * @param path 需要处理的文件
-     * @return 返回文件列表
-     */
-    public static List<File> listFileAll(File path) {
-        List<File> list = new ArrayList<>();
-        File[] files = path.listFiles();
-        if (Valid.valid(files)) {
-            for (File file : files) {
-                list.add(file);
-                if (file.isDirectory()) {
-                    list.addAll(listFileAll(file));
-                }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * 罗列指定路径下的全部文件包括文件夹
-     *
-     * @param path   需要处理的文件
-     * @param filter 处理文件的filter
-     * @return 返回文件列表
-     */
-    public static List<File> listFileFilter(File path, FilenameFilter filter) {
-        List<File> list = new ArrayList<>();
-        File[] files = path.listFiles();
-        if (Valid.valid(files)) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    list.addAll(listFileFilter(file, filter));
-                } else {
-                    if (filter.accept(file.getParentFile(), file.getName())) {
-                        list.add(file);
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * 获取指定目录下的特点文件,通过后缀名过滤
-     *
-     * @param dirPath  需要处理的文件
-     * @param postfixs 文件后缀
-     * @return 返回文件列表
-     */
-    public static List<File> listFileFilter(File dirPath, final String postfixs) {
-        /*
-        如果在当前目录中使用Filter讲只罗列当前目录下的文件不会罗列孙子目录下的文件
-        FilenameFilter filefilter = new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return name.endsWith(postfixs);
-            }
-        };
-        */
-        List<File> list = new ArrayList<File>();
-        File[] files = dirPath.listFiles();
-        if (Valid.valid(files)) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    list.addAll(listFileFilter(file, postfixs));
-                } else {
-                    String fileName = file.getName().toLowerCase();
-                    if (fileName.endsWith(postfixs.toLowerCase())) {
-                        list.add(file);
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * 在指定的目录下搜寻文个文件
-     *
-     * @param dirPath  搜索的目录
-     * @param fileName 搜索的文件名
-     * @return 返回文件列表
-     */
-    public static List<File> searchFile(File dirPath, String fileName) {
-        List<File> list = new ArrayList<>();
-        File[] files = dirPath.listFiles();
-        if (Valid.valid(files)) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    list.addAll(searchFile(file, fileName));
-                } else {
-                    String Name = file.getName();
-                    if (Name.equals(fileName)) {
-                        list.add(file);
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * 查找符合正则表达式reg的的文件
-     *
-     * @param dirPath 搜索的目录
-     * @param reg     正则表达式
-     * @return 返回文件列表
-     */
-    public static List<File> searchFileReg(File dirPath, String reg) {
-        List<File> list = new ArrayList<>();
-        File[] files = dirPath.listFiles();
-        if (Valid.valid(files)) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    list.addAll(searchFile(file, reg));
-                } else {
-                    String Name = file.getName();
-                    if (RegUtil.isMatche(Name, reg)) {
-                        list.add(file);
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
 
     /**
      * 获取文件后缀名
