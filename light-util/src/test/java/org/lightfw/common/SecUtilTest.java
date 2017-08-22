@@ -2,7 +2,6 @@ package org.lightfw.common;
 
 import org.junit.Test;
 import org.lightfw.util.sercurity.encrypt.Md5Util;
-import test.TestUtil;
 
 import java.io.File;
 

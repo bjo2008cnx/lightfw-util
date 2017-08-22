@@ -11,7 +11,15 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    //javax.servlet
+    compileOnly 'javax.servlet.jsp:jsp-api:2.1'
+    compileOnly 'javax.servlet:servlet-api:2.5'
+    compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
+
+    compile project(':light-util')
 }
+
 
 task "mkdirs" << {
     sourceSets*.java.srcDirs*.each { it.mkdirs() }

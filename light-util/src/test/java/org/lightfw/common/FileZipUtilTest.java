@@ -3,7 +3,6 @@ package org.lightfw.common;
 import org.lightfw.util.system.SysInfoUtil;
 import org.lightfw.util.ext.io.FileZipUtil;
 import org.junit.Test;
-import test.TestUtil;
 
 import java.io.File;
 

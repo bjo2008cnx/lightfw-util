@@ -1,9 +1,7 @@
 package org.lightfw.common;
 
-import org.lightfw.Bean.BusinessLog;
 import org.junit.Test;
 import org.lightfw.util.ext.dynamic.ClassUtil;
-import test.TestUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -122,17 +120,6 @@ public class ClassUtilTest {
             System.out.println(str);
         }
 
-
-    }
-
-
-    @Test
-    public void testGetterAndSetter() throws InvocationTargetException, IllegalAccessException {
-
-        System.out.println("============Setter和Getter================");
-        BusinessLog log = new BusinessLog();
-        ClassUtil.setter(log, "operationName", "setter-method-test", String.class);
-        System.out.println(log);
 
     }
 
