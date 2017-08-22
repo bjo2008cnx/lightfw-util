@@ -1,4 +1,4 @@
-package org.lightfw.util.ext.json;
+package org.lightfw.utilx.text.transfer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
