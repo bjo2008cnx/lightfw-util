@@ -7,7 +7,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Map;
 
 /**
  * 反射工具类
@@ -83,8 +82,7 @@ public class ReflectUtil {
         return null;
     }
 
-    public static Object invokeMethod(Object object, String methodName, Class<?>[] parameterTypes, Object[] parameters)
-            throws InvocationTargetException {
+    public static Object invokeMethod(Object object, String methodName, Class<?>[] parameterTypes, Object[] parameters) throws InvocationTargetException {
         Method method = getDeclaredMethod(object, methodName, parameterTypes);
         if (method == null) {
             throw new IllegalArgumentException("Could not find method [" + methodName + "] on target [" + object + "]");
@@ -100,8 +98,7 @@ public class ReflectUtil {
     public static void setFieldValue(Object object, String fieldName, Object value) {
         Field field = getDeclaredField(object, fieldName);
 
-        if (field == null)
-            throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + object + "]");
+        if (field == null) throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + object + "]");
 
         makeAccessible(field);
 
@@ -112,20 +109,24 @@ public class ReflectUtil {
         }
     }
 
+    /**
+     * get 属性值
+     *
+     * @param object
+     * @param fieldName
+     * @return
+     */
     public static Object getFieldValue(Object object, String fieldName) {
         Field field = getDeclaredField(object, fieldName);
-        if (field == null)
-            throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + object + "]");
+        if (field == null) throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + object + "]");
 
         makeAccessible(field);
-
-        Object result = null;
+        Object result;
         try {
             result = field.get(object);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            return null;
         }
-
         return result;
     }
 
@@ -195,34 +196,4 @@ public class ReflectUtil {
         return result;
     }
 
-    /**
-     * 调用私有方法, TODO 加参数
-     *
-     * @param obj
-     * @param methodName
-     */
-    public static Object invokePrivate(Object obj, String methodName, Map<Class, Object> params) {
-        //测试没有参数的echoRequest()方法
-        Method method = null;
-        try {
-            method = obj.getClass().getDeclaredMethod(methodName, null);
-        } catch (NoSuchMethodException e) {
-            throw ExceptionUtil.transform(e);
-        }
-        /*Method对象继承自java.lang.reflect.AccessibleObject，父类方法setAccessible可调,将此对象的 accessible 标志设置为指示的布尔值。
-        值为 true 则指示反射的对象在使用时应该取消 Java 语言访问检查。值为 false 则指示反射的对象应该实施 Java 语言访问检查。
-        要访问私有方法必须将accessible设置为true，否则抛java.lang.IllegalAccessException  */
-        method.setAccessible(true);
-        Object result = null;
-
-        //调用
-        try {
-            result = method.invoke(obj, null);
-        } catch (IllegalAccessException e) {
-            throw ExceptionUtil.transform(e);
-        } catch (InvocationTargetException e) {
-            throw ExceptionUtil.transform(e);
-        }
-        return result;
-    }
 }
