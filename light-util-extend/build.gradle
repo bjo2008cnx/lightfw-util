@@ -59,6 +59,7 @@ dependencies {
     compileOnly 'org.apache.curator:curator-recipes:2.4.2'
     compileOnly 'javassist:javassist:3.12.0.GA'
     compileOnly 'cglib:cglib:3.2.4'
+    compile project(':light-util')
 
     testCompile 'redis.clients:jedis:2.7.2'
     testCompile 'junit:junit:4.12'
@@ -66,5 +67,4 @@ dependencies {
     testCompile 'org.springframework:spring-beans:4.2.1.RELEASE'
     testCompile 'org.apache.httpcomponents:httpclient:4.3.4'
 
-    compile project(':light-util')
 }

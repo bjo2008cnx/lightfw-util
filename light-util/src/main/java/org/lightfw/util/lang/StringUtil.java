@@ -962,7 +962,7 @@ public class StringUtil {
      *
      * @param longs
      * @param splitStr
-     * @return 如果longs为null,返回null
+     * @return 如果longs为null, 返回null
      */
     public static String join(long[] longs, String splitStr) {
         StringBuilder sb = new StringBuilder();
@@ -1496,5 +1496,15 @@ public class StringUtil {
         } catch (UnsupportedEncodingException e) {
             throw ExceptionUtil.transform(e);
         }
+    }
+
+    /**
+     * 加双引号
+     *
+     * @param str
+     * @return
+     */
+    public static String quote(String str) {
+        return "\"".concat(str).concat("\"");
     }
 }
