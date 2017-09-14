@@ -1,4 +1,4 @@
-package org.lightfw.utilx.web.request;
+package org.lightfw.utilx.web.url;
 
 import java.util.ArrayList;
 import java.util.List;

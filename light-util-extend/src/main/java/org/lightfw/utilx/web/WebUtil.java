@@ -2,6 +2,7 @@ package org.lightfw.utilx.web;
 
 import org.lightfw.util.lang.StringUtil;
 import org.lightfw.util.math.ConvertUtil;
+import org.lightfw.utilx.web.url.UrlUtil;
 
 import java.io.UnsupportedEncodingException;
 

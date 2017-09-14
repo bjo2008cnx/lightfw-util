@@ -1,17 +1,16 @@
-package org.lightfw.utilx.web;
+package org.lightfw.utilx.web.url;
 
 import org.lightfw.util.lang.StringUtil;
 import org.lightfw.util.text.CharUtil;
 import org.lightfw.util.text.CharsetUtil;
+import org.lightfw.utilx.web.url.PathPatternMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -731,6 +730,76 @@ public class UrlUtil {
             result = parseQuery(queryUri, '&', '=', ",");
         }
         return result;
+    }
+
+    /**
+     * 匹配路径是否在控制域的范围内
+     *
+     * @param urls
+     * @param path
+     * @return
+     */
+    public static boolean urlMatch(SortedSet<String> urls, String path) {
+
+        if(urls == null || urls.size() == 0)
+            return false;
+
+        SortedSet<String> hurl = urls.headSet(path + "\0");
+        SortedSet<String> turl = urls.tailSet(path + "\0");
+
+        if (hurl.size() > 0) {
+            String before = hurl.last();
+            if (pathMatch(path, before))
+                return true;
+        }
+
+        if (turl.size() > 0) {
+            String after = turl.first();
+            if (pathMatch(path, after))
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 匹配路径是否在控制域的范围内
+     *
+     * @param path
+     * @param domain
+     * @return
+     */
+    private static boolean pathMatch(String path, String domain) {
+        if (PathPatternMatcher.isPattern(domain)) {
+
+            return PathPatternMatcher.match(domain, path);
+
+            // TODO 使用正则方式验证，待验证
+            // domain = domain.replaceAll("\\*", "\\\\S*");
+            //
+            // Pattern pattern = Pattern.compile(domain);
+            //
+            // Matcher matcher = pattern.matcher(path);
+            // return matcher.matches();
+
+        } else {
+            return domain.equals(path);
+        }
+    }
+
+    public static void main(String[] args) {
+        String path = "/ht-callout/customer.action";
+
+        SortedSet<String> urls = new TreeSet<String>();
+        urls.add("/ht-callout/*");
+        urls.add("/ht-sys/*");
+        urls.add("/ht-report/*");
+        urls.add("/*");
+        urls.add("");
+
+        boolean b = urlMatch(urls, path);
+
+        System.out.println(b);
     }
 
 }
