@@ -1,4 +1,4 @@
-package org.lightfw.utilx.net;
+package org.lightfw.utilx.web;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;

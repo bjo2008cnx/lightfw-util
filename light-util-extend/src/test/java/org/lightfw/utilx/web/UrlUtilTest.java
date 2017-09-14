@@ -3,6 +3,7 @@ package org.lightfw.utilx.web;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.lightfw.util.text.CharsetUtil;
+import org.lightfw.utilx.web.url.UrlUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;

@@ -1,6 +1,7 @@
 package org.lightfw.utilx.net;
 
 import org.junit.Test;
+import org.lightfw.utilx.web.HttpClientUtil;
 
 /**
  * Created by lenovo on 2017/7/25.
