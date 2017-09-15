@@ -10,18 +10,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 统计文件数量
  */
-        public class FileCountTool {
+public class FileCountTool {
 
-            public static void main(String[] args) {
+    public static void main(String[] args) {
         File file = new File("E:\\codes\\o2o\\");
         File[] files = file.listFiles();
-        Map<AtomicInteger,String> map = new TreeMap(
-              new Comparator<AtomicInteger>() {
-                public int compare(AtomicInteger obj1, AtomicInteger obj2) {
-                    // 降序排序
-                    return obj2.longValue()>obj1.longValue()?1:-1;
-                }
-            });
+        Map<AtomicInteger, String> map = new TreeMap(new Comparator<AtomicInteger>() {
+            public int compare(AtomicInteger obj1, AtomicInteger obj2) {
+                // 降序排序
+                return obj2.longValue() > obj1.longValue() ? 1 : -1;
+            }
+        });
 
         for (int i = 0; i < files.length; i++) {
             File fileTmp = files[i];
@@ -30,12 +29,12 @@ import java.util.concurrent.atomic.AtomicInteger;
                 AtomicInteger lineCount = new AtomicInteger(0);
                 getFile(fileTmp, count, lineCount);
                 //System.out.println(fileTmp.toString() + ":" + count + ":" + lineCount);
-                map.put(lineCount,fileTmp.toString()+":"+count);
+                map.put(lineCount, fileTmp.toString() + ":" + count);
             }
         }
         Set<Map.Entry<AtomicInteger, String>> set = map.entrySet();
-        for (Map.Entry<AtomicInteger, String> entry: set){
-            System.out.println(entry.getKey()+" :: "+entry.getValue());
+        for (Map.Entry<AtomicInteger, String> entry : set) {
+            System.out.println(entry.getKey() + " :: " + entry.getValue());
         }
     }
 
