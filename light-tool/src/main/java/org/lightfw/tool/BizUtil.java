@@ -13,7 +13,7 @@ import third.MerchantCreateRequestVo;
 public class BizUtil {
     public static void main(String[] args) {
         ChildAccount vo = new ChildAccount();
-        String str = CopyObjectCodeTool.genearete(vo);
+        String str = ReadCSVCodeTool.genearete(vo);
         System.out.println(str);
     }
 }

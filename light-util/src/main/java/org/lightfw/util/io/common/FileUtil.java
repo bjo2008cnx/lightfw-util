@@ -7,8 +7,8 @@ import lombok.extern.log4j.Log4j2;
 import org.lightfw.util.ext.dynamic.RegUtil;
 import org.lightfw.util.ext.io.FileTypeImpl;
 import org.lightfw.util.lang.ExceptionUtil;
-import org.lightfw.util.validate.Valid;
 import org.lightfw.util.sercurity.encrypt.Md5Util;
+import org.lightfw.util.validate.Valid;
 
 import java.io.*;
 import java.net.FileNameMap;
@@ -59,6 +59,20 @@ public class FileUtil {
         } catch (IOException e) {
             log.error("Fail to copy file.", e);
             throw ExceptionUtil.transform(e);
+        }
+    }
+
+    /**
+     * 写文件
+     *
+     * @param content
+     * @param filePath
+     */
+    public static void write(String content, String filePath) {
+        try {
+            write(content.getBytes(), new File(filePath));
+        } catch (IOException e) {
+            log.error("fail to write file :" + filePath, e);
         }
     }
 
@@ -394,10 +408,7 @@ public class FileUtil {
      * @return 是否成功
      */
     public static boolean copy(File file, String targetFile) {
-        try (
-                FileInputStream fin = new FileInputStream(file);
-                FileOutputStream fout = new FileOutputStream(new File(targetFile))
-        ) {
+        try (FileInputStream fin = new FileInputStream(file); FileOutputStream fout = new FileOutputStream(new File(targetFile))) {
             FileChannel in = fin.getChannel();
             FileChannel out = fout.getChannel();
             //设定缓冲区
