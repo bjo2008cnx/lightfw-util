@@ -959,6 +959,16 @@ public class StringUtil {
     }
 
     /**
+     * 把string array or list用给定的符号symbol连接成一个字符串
+     *
+     * @param list 需要处理的列表
+     * @return 处理后的字符串
+     */
+    public static String join(Collection list) {
+        return join(list, ",");
+    }
+
+    /**
      * 功能: 把new long[]{1L, 2L, 3L}转化为 "1,2,3"
      *
      * @param longs
