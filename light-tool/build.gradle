@@ -2,6 +2,13 @@
 repositories {
     mavenCentral()
 }
+repositories {
+    mavenCentral()
+    maven {url 'http://qc-maven.weimob.com/content/repositories/thirdparty/'}
+    maven {url 'http://qc-maven.weimob.com/content/repositories/weimob/'}
+    maven {url 'http://qc-maven.weimob.com/content/repositories/weimob-snapshots/'}
+    maven {url 'http://maven.weimob.com/content/groups/public/'}
+}
 
 dependencies {
     //compile project(':light-util')
@@ -10,6 +17,13 @@ dependencies {
     compileOnly 'com.fasterxml.jackson.core:jackson-core:2.6.1'
     compileOnly 'com.fasterxml.jackson.core:jackson-databind:2.6.1'
     compileOnly 'com.fasterxml.jackson.core:jackson-annotations:2.6.1'
+
+    compile 'com.weimob.saas.ac:trans-core-service:1.0.0-SNAPSHOT'
+    compile 'com.weimob.saas.ac:trans-core-service-interface:1.0.0-SNAPSHOT'
+    compile 'com.weimob.saas.ac:trans-core-service-client:1.0.0-SNAPSHOT'
+    compile 'com.weimob.saas.ac:spf-core-lib:1.0.0-SNAPSHOT'
+    compile 'com.weimob.saas.ac:base-core-service-client:1.2.2-SNAPSHOT'
+    compile 'com.weimob.saas.bc:base-core-service-client:1.2.3-SNAPSHOT'
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }

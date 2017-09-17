@@ -7,6 +7,7 @@ import org.lightfw.constant.GlobalConstant;
 import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1413,7 +1414,7 @@ public class StringUtil {
      * @param symbol 链接的符号
      * @return 处理后的字符串
      */
-    public static String join(List list, String symbol) {
+    public static String join(Collection list, String symbol) {
         String result = "";
         if (list != null) {
             for (Object o : list) {
