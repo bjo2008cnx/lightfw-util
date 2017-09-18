@@ -1428,6 +1428,7 @@ public class StringUtil {
         String result = "";
         if (list != null) {
             for (Object o : list) {
+                if (o == null) continue;
                 String temp = o.toString();
                 if (temp.trim().length() > 0) result += (temp + symbol);
             }
