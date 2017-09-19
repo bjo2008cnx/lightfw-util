@@ -71,10 +71,11 @@ public class SysInfoUtil {
     /**
      * 当用用户的工作目录
      */
-    public static String CURRENT_USER_DIR = PropertiesUtil.getSystemKey("user.dir");
+    public static String CURRENT_USER_DIR = PropertiesUtil.getSystemKey("user.dir"); //亦是IDEA项目路径
     public static String FILE_SEPARATOR = PropertiesUtil.getSystemKey("file.separator");
     public static String PATH_SEPARATOR = PropertiesUtil.getSystemKey("path.separator");
     public static String LINE_SEPARATOR = PropertiesUtil.getSystemKey("line.separator");
+
     /**
      * 总的物理内存
      */
