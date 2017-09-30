@@ -3,6 +3,8 @@ package org.lightfw.utilx.web;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.fluent.Form;
+import org.apache.http.client.fluent.Request;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -14,9 +16,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Map;
+import java.util.Set;
 
 /**
- * HttpClientUtil
+ * Http Client 工具
  *
  * @author Michael.Wang
  * @date 2017/7/25
@@ -26,6 +30,12 @@ public class HttpClientUtil {
     public static final String JSON_CONTENT_TYPE = "application/json";
     public static final String ENCODING = "utf-8";
 
+    /**
+     * 发送get 请求
+     *
+     * @param url
+     * @return
+     */
     public static String sendGetRequest(String url) {
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(url);
@@ -38,6 +48,42 @@ public class HttpClientUtil {
             throw (e instanceof RuntimeException) ? (RuntimeException) e : new RuntimeException(e);
         }
         return result;
+    }
+
+    /**
+     * 发送form形式的http请求
+     *
+     * @param url
+     * @param params
+     * @return
+     * @throws IOException
+     */
+    public static String sendFormPostRequest(String url, Map<String, String> params) throws IOException {
+        Set<Map.Entry<String, String>> entries = params.entrySet();
+        Form form = Form.form();
+        for (Map.Entry<String, String> entry : entries) {
+            form.add(entry.getKey(), entry.getValue());
+        }
+        return Request.Post(url).bodyForm(form.build()).execute().returnContent().asString();
+    }
+
+    /**
+     * 发送form形式的http请求
+     *
+     * @param url
+     * @param keyValues
+     * @return
+     * @throws IOException
+     */
+    public static String sendFormPostRequest(String url, String... keyValues) throws IOException {
+        if (keyValues == null || keyValues.length % 2 != 0) {
+            throw new IllegalArgumentException("keyValues parameter count should be even.");
+        }
+        Form form = Form.form();
+        for (int i = 0; i < keyValues.length; i = i + 2) {
+            form.add(keyValues[i], keyValues[i + 1]);
+        }
+        return Request.Post(url).bodyForm(form.build()).execute().returnContent().asString();
     }
 
     /**
