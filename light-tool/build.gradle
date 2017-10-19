@@ -11,19 +11,11 @@ repositories {
 }
 
 dependencies {
-    //compile project(':light-util')
-    compile 'org.lightfw:light-util:1.0-SNAPSHOT'
+    compile project(':light-util')
     compileOnly group: 'com.alibaba', name: 'fastjson', version: '1.2.28'
     compileOnly 'com.fasterxml.jackson.core:jackson-core:2.6.1'
     compileOnly 'com.fasterxml.jackson.core:jackson-databind:2.6.1'
     compileOnly 'com.fasterxml.jackson.core:jackson-annotations:2.6.1'
-
-    compile 'com.weimob.saas.ac:trans-core-service:1.0.0-SNAPSHOT'
-    compile 'com.weimob.saas.ac:trans-core-service-interface:1.0.0-SNAPSHOT'
-    compile 'com.weimob.saas.ac:trans-core-service-client:1.0.0-SNAPSHOT'
-    compile 'com.weimob.saas.ac:spf-core-lib:1.0.0-SNAPSHOT'
-    compile 'com.weimob.saas.ac:base-core-service-client:1.2.2-SNAPSHOT'
-    compile 'com.weimob.saas.bc:base-core-service-client:1.2.3-SNAPSHOT'
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
