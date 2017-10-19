@@ -939,10 +939,10 @@ public class StringUtil {
      * 功能: 把new String[]{"abc", null, "123"}转化为 "abc,123"
      *
      * @param arrayString
-     * @param splitStr
+     * @param spliter
      * @return
      */
-    public static String join(String[] arrayString, String splitStr) {
+    public static String join(char spliter, String... arrayString) {
         StringBuilder sb = new StringBuilder();
         if (arrayString == null || arrayString.length == 0) {
             return null;
@@ -950,7 +950,7 @@ public class StringUtil {
         for (int i = 0; i < arrayString.length; i++) {
             if (arrayString[i] != null && arrayString[i].length() > 0) {
                 if (sb.length() > 0) {
-                    sb.append(splitStr);
+                    sb.append(spliter);
                 }
                 sb.append(arrayString[i]);
             }
