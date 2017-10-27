@@ -8,3 +8,5 @@
 
 ##依赖的工具包说明：
 * javassist: 动态字节码工具包
+
+gradle versin:3.5.1

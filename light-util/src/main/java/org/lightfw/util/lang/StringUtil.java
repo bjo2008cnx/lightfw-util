@@ -1,7 +1,6 @@
 package org.lightfw.util.lang;
 
 import com.google.common.base.Joiner;
-import lombok.extern.log4j.Log4j2;
 import org.lightfw.constant.GlobalConstant;
 
 import java.io.UnsupportedEncodingException;
@@ -15,7 +14,6 @@ import java.util.regex.Pattern;
 /**
  * 一些通用的字符串处理
  */
-@Log4j2
 public class StringUtil {
 
     private static final int INDEX_NOT_FOUND = -1;
