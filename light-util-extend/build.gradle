@@ -66,4 +66,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'com.google.guava:guava:18.0'
     testCompile 'org.springframework:spring-beans:4.2.1.RELEASE'
+
+    compile project(':light-util')
 }
