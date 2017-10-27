@@ -652,6 +652,15 @@ public class UrlUtil {
         return map;
     }
 
+    /**
+     * 解析字符串返回map键值对(例：a=1&b=2 => a=1,b=2)
+     * @param query
+     * @param dupLink
+     * @return
+     */
+    public static Map<String, String> parseQuery(String query,  String dupLink) {
+        return parseQuery(query,'&','=',dupLink);
+    }
 
     /**
      * 解析字符串返回map键值对(例：a=1&b=2 => a=1,b=2)
