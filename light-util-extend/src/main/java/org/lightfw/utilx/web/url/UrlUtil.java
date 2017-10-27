@@ -3,7 +3,6 @@ package org.lightfw.utilx.web.url;
 import org.lightfw.util.lang.StringUtil;
 import org.lightfw.util.text.CharUtil;
 import org.lightfw.util.text.CharsetUtil;
-import org.lightfw.utilx.web.url.PathPatternMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
@@ -53,17 +52,16 @@ public class UrlUtil {
     // Regex patterns that matches URIs. See RFC 3986, appendix B
 
     private static final Pattern URI_PATTERN = Pattern.compile("^(" + SCHEME_PATTERN + ")?" + "(//(" + USERINFO_PATTERN + "@)?" + HOST_PATTERN + "(:" +
-            PORT_PATTERN +
-            ")?" + ")?" + PATH_PATTERN + "(\\?" + QUERY_PATTERN + ")?" + "(#" + LAST_PATTERN + ")?");
+            PORT_PATTERN + ")?" + ")?" + PATH_PATTERN + "(\\?" + QUERY_PATTERN + ")?" + "(#" + LAST_PATTERN + ")?");
 
     private static final Pattern HTTP_URL_PATTERN = Pattern.compile('^' + HTTP_PATTERN + "(//(" + USERINFO_PATTERN + "@)?" + HOST_PATTERN + "(:" +
-            PORT_PATTERN + ")?" + ")?" +
-            PATH_PATTERN + "(\\?" + LAST_PATTERN + ")?");
+            PORT_PATTERN + ")?" + ")?" + PATH_PATTERN + "(\\?" + LAST_PATTERN + ")?");
 
 
     /**
      * 替换路径中的数字为*
      * 例：/a/bc/-1/11112222333344455556666/test/-1/c =>/a/bc/X/X/test/X/c
+     *
      * @param uri
      * @return
      */
@@ -442,50 +440,43 @@ public class UrlUtil {
             public boolean isValid(char c) {
                 return CharUtil.isAlpha(c) || CharUtil.isDigit(c) || c == '+' || c == '-' || c == '.';
             }
-        },
-        //		AUTHORITY {
+        }, //		AUTHORITY {
 //			@Override
 //			public boolean isValid(char c) {
 //				return isUnreserved(c) || isSubDelimiter(c) || c == ':' || c == '@';
 //			}
 //		},
         USER_INFO {
-            @Override
-            public boolean isValid(char c) {
-                return CharUtil.isUnreserved(c) || CharUtil.isSubDelimiter(c) || c == ':';
-            }
-        },
-        HOST {
+                    @Override
+                    public boolean isValid(char c) {
+                        return CharUtil.isUnreserved(c) || CharUtil.isSubDelimiter(c) || c == ':';
+                    }
+                }, HOST {
             @Override
             public boolean isValid(char c) {
                 return CharUtil.isUnreserved(c) || CharUtil.isSubDelimiter(c);
             }
-        },
-        PORT {
+        }, PORT {
             @Override
             public boolean isValid(char c) {
                 return CharUtil.isDigit(c);
             }
-        },
-        PATH {
+        }, PATH {
             @Override
             public boolean isValid(char c) {
                 return CharUtil.isPchar(c) || c == '/';
             }
-        },
-        PATH_SEGMENT {
+        }, PATH_SEGMENT {
             @Override
             public boolean isValid(char c) {
                 return CharUtil.isPchar(c);
             }
-        },
-        QUERY {
+        }, QUERY {
             @Override
             public boolean isValid(char c) {
                 return CharUtil.isPchar(c) || c == '/' || c == '?';
             }
-        },
-        QUERY_PARAM {
+        }, QUERY_PARAM {
             @Override
             public boolean isValid(char c) {
                 if (c == '=' || c == '+' || c == '&' || c == ';') {
@@ -493,8 +484,7 @@ public class UrlUtil {
                 }
                 return CharUtil.isPchar(c) || c == '/' || c == '?';
             }
-        },
-        FRAGMENT {
+        }, FRAGMENT {
             @Override
             public boolean isValid(char c) {
                 return CharUtil.isPchar(c) || c == '/' || c == '?';
@@ -676,25 +666,15 @@ public class UrlUtil {
     public static Map<String, String> parseQuery(String query, char split1, char split2, String dupLink) {
         if (!StringUtil.isEmpty(query) && query.indexOf(split2) > 0) {
             Map<String, String> result = new HashMap<>();
-
             String name = null;
             String value = null;
-            String tempValue = "";
             int len = query.length();
             for (int i = 0; i < len; i++) {
                 char c = query.charAt(i);
                 if (c == split2) {
                     value = "";
                 } else if (c == split1) {
-                    if (!StringUtil.isEmpty(name) && value != null) {
-                        if (dupLink != null) {
-                            tempValue = result.get(name);
-                            if (tempValue != null) {
-                                value += dupLink + tempValue;
-                            }
-                        }
-                        result.put(name, value);
-                    }
+                    handleDupLink(dupLink, result, name, value);
                     name = null;
                     value = null;
                 } else if (value != null) {
@@ -703,20 +683,23 @@ public class UrlUtil {
                     name = (name != null) ? (name + c) : "" + c;
                 }
             }
-
-            if (!StringUtil.isEmpty(name) && value != null) {
-                if (dupLink != null) {
-                    tempValue = result.get(name);
-                    if (tempValue != null) {
-                        value += dupLink + tempValue;
-                    }
-                }
-                result.put(name, value);
-            }
-
+            handleDupLink(dupLink, result, name, value);
             return result;
         }
         return null;
+    }
+
+    private static void handleDupLink(String dupLink, Map<String, String> result, String name, String value) {
+        String tempValue;
+        if (!StringUtil.isEmpty(name) && value != null) {
+            if (dupLink != null) {
+                tempValue = result.get(name);
+                if (tempValue != null) {
+                    value += dupLink + tempValue;
+                }
+            }
+            result.put(name, value);
+        }
     }
 
     /**
@@ -741,22 +724,19 @@ public class UrlUtil {
      */
     public static boolean urlMatch(SortedSet<String> urls, String path) {
 
-        if(urls == null || urls.size() == 0)
-            return false;
+        if (urls == null || urls.size() == 0) return false;
 
         SortedSet<String> hurl = urls.headSet(path + "\0");
         SortedSet<String> turl = urls.tailSet(path + "\0");
 
         if (hurl.size() > 0) {
             String before = hurl.last();
-            if (pathMatch(path, before))
-                return true;
+            if (pathMatch(path, before)) return true;
         }
 
         if (turl.size() > 0) {
             String after = turl.first();
-            if (pathMatch(path, after))
-                return true;
+            if (pathMatch(path, after)) return true;
         }
 
         return false;
