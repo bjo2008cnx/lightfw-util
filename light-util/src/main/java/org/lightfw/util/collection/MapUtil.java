@@ -9,6 +9,7 @@ import org.lightfw.util.lang.StringUtil;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -41,6 +42,22 @@ public class MapUtil {
      */
     public static <K, V> MapDifference<K, V> difference(Map<? extends K, ? extends V> left, Map<? extends K, ? extends V> right) {
         return Maps.difference(left, right);
+    }
+
+    /**
+     * 添加map中的全部元素
+     *
+     * @param maps
+     * @return
+     */
+    public static Map putAll(Map... maps) {
+        Map m = new HashMap();
+        for (Map map : maps) {
+            if (map != null) {
+                m.putAll(map);
+            }
+        }
+        return m;
     }
 
     /**
