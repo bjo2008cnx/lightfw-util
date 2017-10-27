@@ -10,8 +10,6 @@ import java.io.UnsupportedEncodingException;
  * 提供Web相关的个工具类
  */
 public class WebUtil {
-
-
     /**
      * 对字符串进行编码
      *

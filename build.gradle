@@ -26,6 +26,9 @@ repositories {
 configurations {
     all*.exclude group: 'log4j', module: 'log4j'
 }
+dependencies {
+    compile "org.projectlombok:lombok:1.16.4"
+}
 
 
 

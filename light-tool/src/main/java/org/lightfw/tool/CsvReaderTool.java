@@ -1,12 +1,12 @@
 package org.lightfw.tool;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.collections.map.HashedMap;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +65,7 @@ public class CsvReaderTool {
     }
 
     private static Map<String, Object> arrayToMap(String[] strs, String[] headers) {
-        Map<String, Object> map = new HashedMap();
+        Map<String, Object> map = new HashMap();
         for (int i = 0; i < headers.length; i++) {
             map.put(headers[i], strs[i]);
         }
