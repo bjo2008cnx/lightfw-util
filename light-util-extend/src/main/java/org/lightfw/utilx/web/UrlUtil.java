@@ -49,6 +49,19 @@ public class UrlUtil {
     }
 
     /**
+     * 解析http请求URI
+     *
+     * @param queryUri http请求的uri
+     */
+    public static Map<String, String> parseHttpQuery(String queryUri) {
+        Map<String, String> result = new HashMap<>();
+        if (!StringUtil.isEmpty(queryUri)) {
+            result = parseQuery(queryUri, '&', '=', ",");
+        }
+        return result;
+    }
+
+    /**
      * 解析字符串返回map键值对(例：a=1&b=2 => a=1,b=2)
      *
      * @param query   源参数字符串
@@ -95,19 +108,6 @@ public class UrlUtil {
             }
             result.put(name, value);
         }
-    }
-
-    /**
-     * 解析http请求URI
-     *
-     * @param queryUri http请求的uri
-     */
-    public static Map<String, String> httpParseQuery(String queryUri) {
-        Map<String, String> result = new HashMap<>();
-        if (!StringUtil.isEmpty(queryUri)) {
-            result = parseQuery(queryUri, '&', '=', ",");
-        }
-        return result;
     }
 
     public static String decode(String url, String encoding) {
