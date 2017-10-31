@@ -1,7 +1,10 @@
 package org.lightfw.utilx.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.lightfw.util.lang.StringUtil;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -9,6 +12,7 @@ import java.util.regex.Pattern;
 /**
  * URL相关的工具类
  */
+@Slf4j
 public class UrlUtil {
     /**
      * 替换路径中的数字为 toReplace 字符,主要用于统计
@@ -104,5 +108,14 @@ public class UrlUtil {
             result = parseQuery(queryUri, '&', '=', ",");
         }
         return result;
+    }
+
+    public static String decode(String url, String encoding) {
+        try {
+            url = URLDecoder.decode(url, encoding);
+        } catch (UnsupportedEncodingException e) {
+            log.error("fail to decoding", e);
+        }
+        return url;
     }
 }
