@@ -7,13 +7,13 @@ import org.lightfw.util.text.CharsetUtil;
 import java.io.UnsupportedEncodingException;
 
 
-public class WebUtilTest extends TestCase {
+public class HtmlUtilTest extends TestCase {
 
     @Test
     public void testhtml() {
         String html = "<div class=\"ipaddress\">服务器IP地址：</div>";
-        System.out.println(WebUtil.unhtml(html));
-        assertEquals(html, WebUtil.html(WebUtil.unhtml(html)));
+        System.out.println(HtmlUtil.unhtml(html));
+        assertEquals(html, HtmlUtil.html(HtmlUtil.unhtml(html)));
     }
 
     @Test
@@ -25,13 +25,9 @@ public class WebUtilTest extends TestCase {
                 "73%22%3E%E6%9C%8D%E5%8A%A1%E5%99%A8%49%50%E5%9C%B0%E5%9D%80%EF%BC" +
                 "%9A%3C%2F%64%69%76%3E";
         //GBK
-        assertEquals(gbk, WebUtil.escape(unescape, CharsetUtil.GBK));
-        assertEquals(unescape, WebUtil.unescape(gbk, CharsetUtil.GBK));
+        assertEquals(gbk, HtmlUtil.escape(unescape, CharsetUtil.GBK));
 
         //utf8
-        assertEquals(utf8, WebUtil.escape(unescape, CharsetUtil.UTF_8));
-        assertEquals(unescape, WebUtil.unescape(utf8, CharsetUtil.UTF_8));
+        assertEquals(utf8, HtmlUtil.escape(unescape, CharsetUtil.UTF_8));
     }
-
-
 }

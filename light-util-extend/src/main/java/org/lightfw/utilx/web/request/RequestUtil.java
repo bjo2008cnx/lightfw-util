@@ -14,7 +14,6 @@ import java.util.Locale;
 
 @Slf4j
 public class RequestUtil {
-
     /**
      * 功能: 从request得到IP地址
      *
@@ -24,18 +23,21 @@ public class RequestUtil {
     public static String getIp(ServletRequest request) {
         String ip = null;
         if (request instanceof HttpServletRequest) {
-            ip = ((HttpServletRequest) request).getHeader("X-Forwarded-For");
-            if (ip != null && ip.trim().indexOf(",") > 0) {
-                ip = ip.trim().substring(0, ip.trim().indexOf(","));
-            }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-                ip = ((HttpServletRequest) request).getHeader("X-Real-IP");
+            HttpServletRequest req = (HttpServletRequest) request;
+            ip = req.getHeader("X-Forwarded-For");
+            if (isEmptyOrUnknown(ip)) {
+                ip = req.getHeader("X-Real-IP");
+            } else if (ip != null && ip.indexOf(",") > 0) {
+                ip = ip.trim();
+                ip = ip.substring(0, ip.indexOf(","));
             }
         }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
+        ip = isEmptyOrUnknown(ip) ? request.getRemoteAddr() : ip;
         return ip;
+    }
+
+    private static boolean isEmptyOrUnknown(String ip) {
+        return ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip);
     }
 
     /**
@@ -94,7 +96,7 @@ public class RequestUtil {
         }
         if (StringUtil.isNotEmpty(queryString)) {
             if (StringUtil.isNotEmpty(requestBody)) {
-                requestBody = queryString + "," + requestBody;
+                requestBody = queryString + "," + requestBody; //实际使用时需要验证
             } else {
                 requestBody = queryString;
             }
@@ -122,7 +124,7 @@ public class RequestUtil {
         while (names.hasMoreElements()) {
             String element = names.nextElement();
             String value = request.getParameter(element);
-            builder.append(StringUtil.quote(value));
+            builder.append(value);
             if (names.hasMoreElements()) {
                 builder.append(",");
             }

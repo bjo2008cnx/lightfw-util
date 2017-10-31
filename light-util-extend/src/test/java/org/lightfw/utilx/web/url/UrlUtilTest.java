@@ -1,6 +1,7 @@
 package org.lightfw.utilx.web.url;
 
 import org.junit.Test;
+import org.lightfw.utilx.web.UrlUtil;
 
 import java.util.Map;
 import java.util.Set;

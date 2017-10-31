@@ -151,7 +151,18 @@ public class ArrayUtil {
      * @param right
      * @return
      */
-    public static boolean eqaul(Object[] left, Object[] right) {
+    public static boolean isEqaul(Object[] left, Object[] right) {
         return Arrays.equals(left, right);
+    }
+
+    /**
+     * 比较两个数组都否相同
+     *
+     * @param left
+     * @param right
+     * @return
+     */
+    public static boolean isEqaulIgnoreEmptyAndOrder(Object[] left, Object[] right) {
+        return Arrays.equals(left, right); //TODO
     }
 }

@@ -2,7 +2,7 @@ package org.lightfw.utilx.text.transfer;
 
 import org.junit.Test;
 
-public class JsonUtilTest {
+public class JSONUtilTest {
 
     private static final String RULES = "{'bills':" +
             "[{'bill':'order'," +
@@ -21,7 +21,7 @@ public class JsonUtilTest {
     @Test
     public void testFromJson() throws Exception {
         String str = RULES.replaceAll("'", "\"");
-        BillNumRules json = JsonUtil.fromJson(str, BillNumRules.class);
+        BillNumRules json = JSONUtil.fromJson(str, BillNumRules.class);
         System.out.println(json);
     }
 }

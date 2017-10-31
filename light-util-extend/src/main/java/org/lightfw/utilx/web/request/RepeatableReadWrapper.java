@@ -1,5 +1,7 @@
 package org.lightfw.utilx.web.request;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ReadListener;
@@ -21,6 +23,8 @@ public class RepeatableReadWrapper extends HttpServletRequestWrapper {
     /**
      * input stream 的buffer
      */
+    @Getter
+    @Setter
     private final String body;
 
     /**
@@ -45,7 +49,7 @@ public class RepeatableReadWrapper extends HttpServletRequestWrapper {
                     stringBuilder.append(charBuffer, BUFFER_START_POSITION, bytesRead);
                 }
             } catch (IOException e) {
-                log.error("Fail to read input stream",e);
+                log.error("Fail to read input stream", e);
             }
         } else {
             stringBuilder.append("");

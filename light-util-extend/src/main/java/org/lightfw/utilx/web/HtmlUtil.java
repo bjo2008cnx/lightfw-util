@@ -2,14 +2,13 @@ package org.lightfw.utilx.web;
 
 import org.lightfw.util.lang.StringUtil;
 import org.lightfw.util.math.ConvertUtil;
-import org.lightfw.utilx.web.url.UrlUtil;
 
 import java.io.UnsupportedEncodingException;
 
 /**
  * 提供Web相关的个工具类
  */
-public class WebUtil {
+public class HtmlUtil {
     /**
      * 对字符串进行编码
      *
@@ -24,21 +23,6 @@ public class WebUtil {
         char[] chars = ConvertUtil.bytesToChars(ConvertUtil.encodeBytes(str.getBytes(encoding), '%'));
         return new String(chars);
     }
-
-    /**
-     * 对字符串进行解码
-     *
-     * @param str      需要处理的字符串
-     * @param encoding 解码方式
-     * @return 解码后的字符串
-     */
-    public static String unescape(String str, String encoding) {
-        if (StringUtil.isEmpty(str)) {
-            return "";
-        }
-        return UrlUtil.decodeQuery(str, encoding);
-    }
-
 
     /**
      * HTML标签转义方法

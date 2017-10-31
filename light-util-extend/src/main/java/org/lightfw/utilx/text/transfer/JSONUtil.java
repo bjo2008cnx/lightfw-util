@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
-public class JsonUtil {
+public class JSONUtil {
 	public static ObjectMapper objectMapper = new ObjectMapper();
 
 	private static final SerializerFeature[] jsonFeatures = {
