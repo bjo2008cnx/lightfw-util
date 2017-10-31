@@ -3,10 +3,9 @@ package org.lightfw.util;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
- * 认证相关的配置 TODO 拆分成两个类似
+ * 配置类 TODO 拆分成两个类似
  *
  * @author Michael.Wang
  * @date 2017/8/21
@@ -32,8 +31,9 @@ public class ConfigExample implements Serializable {
     }
 
     private static ConfigExample load() {
-        Map prop = PropertyUtil.load(AUTH_PROPERTIES);
-        ConfigExample config = PopulateUtil.map2Obj(prop, ConfigExample.class);
-        return config;
+        //Map prop = PropertyUtil.load(AUTH_PROPERTIES);
+        //ConfigExample config = PopulateUtil.map2Obj(prop, ConfigExample.class);
+        //return config;
+        return null;
     }
 }
