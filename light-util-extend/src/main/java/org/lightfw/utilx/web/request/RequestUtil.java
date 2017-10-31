@@ -10,6 +10,9 @@ import java.util.Locale;
 
 @Slf4j
 public class RequestUtil {
+
+    private static final String MULTIPART_FORM_DATA_VALUE = "multipart/form-data";
+
     /**
      * 功能: 从request得到IP地址
      *
@@ -67,11 +70,9 @@ public class RequestUtil {
      */
     public static String getRequestPath(HttpServletRequest request) {
         String url = request.getServletPath();
-
         if (request.getPathInfo() != null) {
             url += request.getPathInfo();
         }
-
         return url;
     }
 
@@ -85,5 +86,29 @@ public class RequestUtil {
         String userAgent = request.getHeader("User-Agent");
         boolean isInWeChat = userAgent != null && userAgent.toLowerCase(Locale.CHINESE).contains(RequestConstant.WECHAT_AGENT);
         return isInWeChat;
+    }
+
+    /**
+     * 是否GET请求
+     *
+     * @param req
+     * @return
+     */
+    public static boolean isGetRequest(HttpServletRequest req) {
+        return "GET".equals(req.getMethod());
+    }
+
+    /**
+     * 判断是否二进制文件请求
+     *
+     * @param req
+     * @return
+     */
+    public static boolean isUploadRequest(HttpServletRequest req) {
+        String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
+        if (contentType != null && contentType.contains(MULTIPART_FORM_DATA_VALUE)) {
+            return true;
+        }
+        return false;
     }
 }
