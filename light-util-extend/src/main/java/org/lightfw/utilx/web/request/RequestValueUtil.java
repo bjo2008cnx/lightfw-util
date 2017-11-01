@@ -1,7 +1,7 @@
 package org.lightfw.utilx.web.request;
 
 import lombok.extern.log4j.Log4j2;
-import org.lightfw.util.collection.MapUtil;
+import org.lightfw.util.collection.MapWriteUtil;
 import org.lightfw.util.lang.StringUtil;
 import org.lightfw.utilx.text.transfer.JSONUtil;
 import org.lightfw.utilx.web.UrlUtil;
@@ -33,7 +33,7 @@ public class RequestValueUtil {
         Map bodyMap = parseWrapperBody(req);
         Map jsonMap = request.getParameterMap();
         Map requestMap = parseQuery(request.getQueryString());
-        Map all = MapUtil.putAll(bodyMap, jsonMap, requestMap);
+        Map all = MapWriteUtil.putAll(bodyMap, jsonMap, requestMap);
 
         String requestBody = joinValues(all);
         return requestBody;

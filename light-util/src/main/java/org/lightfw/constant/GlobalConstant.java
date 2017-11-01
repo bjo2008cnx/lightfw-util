@@ -19,6 +19,10 @@ public interface GlobalConstant {
         String UTF8 = "UTF8";
         String GBK = "GBK";
         String GB2312 = "GB2312";
+        String ASCII = "US-ASCII";
+        String UTF16 = "UTF-16";
+        String UNICODE = "UNICODE";
+        String ISO88591 = "ISO-8859-1";
         String DEFAULT_ENCODING = UTF8;
     }
 
@@ -26,9 +30,9 @@ public interface GlobalConstant {
      * 默认空集合
      */
     interface Collections {
-        List EMPTY_LIST = java.util.Collections.EMPTY_LIST; //不可变列表，用于返回空列表的场景
-        Map EMPTY_MAP = java.util.Collections.EMPTY_MAP; //不可变Map，用于返回空Map的场景
-        Set EMPTY_SET = java.util.Collections.EMPTY_SET; //不可变Set，用于返回空Set的场景
+        List EMPTY_LIST = Collections.EMPTY_LIST; //不可变列表，用于返回空列表的场景
+        Map EMPTY_MAP = Collections.EMPTY_MAP; //不可变Map，用于返回空Map的场景
+        Set EMPTY_SET = Collections.EMPTY_SET; //不可变Set，用于返回空Set的场景
     }
 
     /**

@@ -1,8 +1,18 @@
 package org.lightfw.utilx.text.transfer;
 
+import org.junit.Assert;
 import org.junit.Test;
+import org.lightfw.util.collection.MapWriteUtil;
+
+import java.util.Map;
 
 public class JSONUtilTest {
+    @Test
+    public void toJSONString() throws Exception {
+        Map map = MapWriteUtil.createHashMap(1, 1, 2, 2);
+        String json = JSONUtil.toJSONString(map);
+        Assert.assertEquals("{1:1,2:2\n" + "}",json);
+    }
 
     private static final String RULES = "{'bills':" +
             "[{'bill':'order'," +
@@ -12,11 +22,6 @@ public class JSONUtilTest {
             "]}";
 
     private static final String pay = "";
-
-    @Test
-    public void testToJSONString() throws Exception {
-
-    }
 
     @Test
     public void testFromJson() throws Exception {
