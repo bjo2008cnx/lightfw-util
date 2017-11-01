@@ -11,13 +11,13 @@ import java.util.Map;
 import java.util.SortedSet;
 
 /**
- * RiskValidater
+ * RiskControlValidater
  *
  * @author Michael.Wang
  * @date 2017/11/1
  */
 @Slf4j
-public class RiskValidater {
+public class RiskControlValidater {
     /**
      * 配置容器
      */
