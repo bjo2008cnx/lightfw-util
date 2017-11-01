@@ -24,7 +24,11 @@ public class RiskControlHandler {
     private static final String ERROR_PAGE = "error_page.html";
 
     public static void handle(HttpServletRequest request, HttpServletResponse resp) throws IOException {
-        RiskControlValidater.validate(request, resp);
+        try {
+            RiskControlValidater.validate(request, resp);
+        } catch (RiskControlException e) {
+            return;
+        }
         String requestBody = RequestValueUtil.parseRequestValues(request);
         boolean validResult = call(requestBody);
         if (!validResult) {
