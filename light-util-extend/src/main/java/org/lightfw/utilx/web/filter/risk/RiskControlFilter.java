@@ -1,15 +1,12 @@
 package org.lightfw.utilx.web.filter.risk;
 
 import lombok.extern.log4j.Log4j2;
-import org.lightfw.utilx.web.request.RequestUtil;
 import org.lightfw.utilx.web.request.RequestValueUtil;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import static org.lightfw.utilx.web.filter.risk.RiskControlHelper.isRiskOff;
 
 /**
  * 风控过滤器.主要功能：
@@ -26,16 +23,12 @@ import static org.lightfw.utilx.web.filter.risk.RiskControlHelper.isRiskOff;
 public class RiskControlFilter implements Filter {
     private static final String ERROR_PAGE = "error_page.html";
 
-    /**
-     * 需要排除的页面
-     */
-    private String excludedPages = null;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         try {
-            excludedPages = filterConfig.getInitParameter("excludedPages");
-            RiskValidater. RISK_CONTROL_CONFIG
+            String excludedPages = filterConfig.getInitParameter("excludedPages");
+            RiskValidater.RISK_CONTROL_CONFIG.put("excludedPages", excludedPages);
         } catch (Throwable t) {
             log.error("fail to load exclude pages config from web.xml.", t);
         }
@@ -45,17 +38,13 @@ public class RiskControlFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
             HttpServletRequest req = (HttpServletRequest) request;
-            //GET请求或upload被忽略
-            if (RequestUtil.isUploadRequest(req) || isExcludedPage(excludedPages) || isRiskOff()) {
-                log.debug("Request is GET or multipart request.Ignored.");
-                chain.doFilter(request, response);
-                return;
-            }
+            HttpServletResponse resp = (HttpServletResponse) response;
+           RiskValidater.validate(req,resp);
 
             String requestBody = RequestValueUtil.parseRequestValues(request);
-            HttpServletResponse res = (HttpServletResponse) response;
-            boolean validateResult = isValidateResult(req, requestBody);
-            handleError(request, req, res, validateResult);
+
+            //boolean validateResult = isValidateResult(req, requestBody);
+            //handleError(request, req, resp, validateResult);
         } catch (Throwable e) {
             log.error("fail to filter", e);
             chain.doFilter(request, response);
@@ -64,6 +53,6 @@ public class RiskControlFilter implements Filter {
 
     @Override
     public void destroy() {
-        excludedPages = null;
+        //excludedPages = null;
     }
 }
