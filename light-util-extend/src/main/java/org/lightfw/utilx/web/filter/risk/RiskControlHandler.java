@@ -13,17 +13,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * RiskControlHelper
+ * RiskControlHandler
  *
  * @author Michael.Wang
  * @date 2017/11/1
  */
 @Slf4j
-public class RiskControlHelper {
+public class RiskControlHandler {
 
     private static final String ERROR_PAGE = "error_page.html";
 
-    public static void control(HttpServletRequest request, HttpServletResponse resp) throws IOException {
+    public static void handle(HttpServletRequest request, HttpServletResponse resp) throws IOException {
         RiskControlValidater.validate(request, resp);
         String requestBody = RequestValueUtil.parseRequestValues(request);
         boolean validResult = call(requestBody);
@@ -45,7 +45,7 @@ public class RiskControlHelper {
         }
 
         boolean result = true;  //实际场景下需要改成下句: result= qualityRiskControl(requestBody);
-        log.info("risk control result is: " + result);
+        log.info("risk handle result is: " + result);
         return result;
     }
 

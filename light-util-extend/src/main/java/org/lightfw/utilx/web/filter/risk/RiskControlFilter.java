@@ -36,7 +36,7 @@ public class RiskControlFilter implements Filter {
         try {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse resp = (HttpServletResponse) response;
-            RiskControlHelper.control(req, resp);
+            RiskControlHandler.handle(req, resp);
         } catch (Throwable e) {
             log.error("fail to filter", e);
             chain.doFilter(request, response);
