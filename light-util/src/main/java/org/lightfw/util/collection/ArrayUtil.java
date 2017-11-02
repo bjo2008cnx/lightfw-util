@@ -112,25 +112,6 @@ public class ArrayUtil {
     }
 
     /**
-     * 功能：数组中是否存在这个元素。
-     *
-     * @param objArr  数组
-     * @param compare 元素
-     * @return 存在返回true，否则返回false。
-     */
-    public static <T> boolean contain(T[] objArr, T compare) {
-        if (isEmpty(objArr)) {
-            return false;
-        }
-        for (T obj : objArr) {
-            if (obj.equals(compare)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * 功能：从数组中随机取出一个元素。
      *
      * @param objs 源数组
@@ -199,6 +180,36 @@ public class ArrayUtil {
         }
         for (String beCompared : toCompares) {
             if (toCompare.equals(beCompared)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 是否等于其中的任一项
+     *
+     * @param objArr  数组
+     * @param compare 元素
+     * @return 存在返回true，否则返回false。
+     */
+    public static <T> boolean equalsOneOf(T compare, T... objArr) {
+        return contains(compare, objArr);
+    }
+
+    /**
+     * 数组中是否存在指定的元素
+     *
+     * @param objArr  数组
+     * @param compare 元素
+     * @return 存在返回true，否则返回false。
+     */
+    public static <T> boolean contains(T compare, T... objArr) {
+        if (isEmpty(objArr)) {
+            return false;
+        }
+        for (T obj : objArr) {
+            if (obj.equals(compare)) {
                 return true;
             }
         }
