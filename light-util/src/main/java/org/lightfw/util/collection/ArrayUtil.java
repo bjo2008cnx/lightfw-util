@@ -1,7 +1,5 @@
 package org.lightfw.util.collection;
 
-import org.lightfw.util.math.MathUtil;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -112,20 +110,6 @@ public class ArrayUtil {
     }
 
     /**
-     * 功能：从数组中随机取出一个元素。
-     *
-     * @param objs 源数组
-     * @return T 数组的一个元素
-     */
-    public static <T> T randomOne(T[] objs) {
-        if (isEmpty(objs)) {
-            return null;
-        }
-        return objs[MathUtil.randomNumber(0, objs.length)];
-    }
-
-
-    /**
      * 比较两个数组都否相同
      *
      * @param left
@@ -145,45 +129,6 @@ public class ArrayUtil {
      */
     public static boolean isEqaulIgnoreEmptyAndOrder(Object[] left, Object[] right) {
         return Arrays.equals(left, right); //TODO
-    }
-
-    /**
-     * 是否等于其中的任一项
-     *
-     * @param toCompare
-     * @param toCompares
-     * @return
-     */
-    public static boolean equalsOneOf(int toCompare, int... toCompares) {
-        if (toCompares == null) {
-            return false;
-        }
-
-        for (int beCompared : toCompares) {
-            if (toCompare == beCompared) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 是否等于其中的任一项
-     *
-     * @param toCompare
-     * @param toCompares
-     * @return
-     */
-    public static boolean equalsOneOf(String toCompare, String... toCompares) {
-        if (toCompare == null || toCompares == null) {
-            return false;
-        }
-        for (String beCompared : toCompares) {
-            if (toCompare.equals(beCompared)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

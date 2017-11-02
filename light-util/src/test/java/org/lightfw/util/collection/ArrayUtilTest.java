@@ -8,6 +8,15 @@ import org.junit.Test;
  */
 public class ArrayUtilTest {
     @Test
+    public void contains() throws Exception {
+        Assert.assertTrue(ArrayUtil.contains(1, 3, 1, 2, 5));
+        Assert.assertTrue(!ArrayUtil.contains(10, 3, 1, 2, 5));
+        Assert.assertTrue(!ArrayUtil.contains(10, null));
+        Assert.assertTrue(!ArrayUtil.contains(null, 10, 3, 1));
+        Assert.assertTrue(!ArrayUtil.contains(null,null));
+    }
+
+    @Test
     public void equalsOneOfInt() throws Exception {
         Assert.assertTrue(ArrayUtil.equalsOneOf(1, 3, 1, 2, 5));
         Assert.assertTrue(!ArrayUtil.equalsOneOf(10, 3, 1, 2, 5));
