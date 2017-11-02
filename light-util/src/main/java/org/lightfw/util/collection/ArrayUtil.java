@@ -165,4 +165,43 @@ public class ArrayUtil {
     public static boolean isEqaulIgnoreEmptyAndOrder(Object[] left, Object[] right) {
         return Arrays.equals(left, right); //TODO
     }
+
+    /**
+     * 是否等于其中的任一项
+     *
+     * @param toCompare
+     * @param toCompares
+     * @return
+     */
+    public static boolean equalsOneOf(int toCompare, int... toCompares) {
+        if (toCompares == null) {
+            return false;
+        }
+
+        for (int beCompared : toCompares) {
+            if (toCompare == beCompared) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 是否等于其中的任一项
+     *
+     * @param toCompare
+     * @param toCompares
+     * @return
+     */
+    public static boolean equalsOneOf(String toCompare, String... toCompares) {
+        if (toCompare == null || toCompares == null) {
+            return false;
+        }
+        for (String beCompared : toCompares) {
+            if (toCompare.equals(beCompared)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
