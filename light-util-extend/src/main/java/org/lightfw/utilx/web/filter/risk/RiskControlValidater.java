@@ -49,7 +49,7 @@ public class RiskControlValidater {
     private static void validate(boolean toAssert, String message) {
         if (!toAssert) {
             log.info(message);
-            throw new RiskControlException(message);
+            throw new RiskControlValidateException(message);
         }
     }
 }

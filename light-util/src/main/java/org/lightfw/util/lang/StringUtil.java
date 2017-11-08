@@ -716,6 +716,23 @@ public class StringUtil {
     }
 
     /**
+     * 判断是否除了逗号之外没有都是empty
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isEmptyExcepComma(String str) {
+        if (isEmpty(str)) return true;
+        String[] splits = str.split(",");
+        for (String split : splits) {
+            if (!isEmpty(split)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * 如果字符串没有超过最长显示长度返回原字符串，否则从开头截取指定长度并加...返回。
      *
      * @param str    原字符串
@@ -923,7 +940,7 @@ public class StringUtil {
      * @param str
      * @return
      */
-    public static boolean arrayContainString(String[] arrayString, String str) {
+    public static boolean contains(String str, String... arrayString) {
         if (arrayString == null || arrayString.length == 0) {
             return false;
         }

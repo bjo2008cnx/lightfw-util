@@ -27,7 +27,7 @@ public class RiskControlHandler {
         //如果验证不通过，直接返回
         try {
             RiskControlValidater.validate(request, resp);
-        } catch (RiskControlException e) {
+        } catch (RiskControlValidateException e) {
             return;
         }
 
