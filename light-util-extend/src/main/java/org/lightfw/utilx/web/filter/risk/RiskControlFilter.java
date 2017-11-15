@@ -1,6 +1,7 @@
 package org.lightfw.utilx.web.filter.risk;
 
 import lombok.extern.log4j.Log4j2;
+import org.lightfw.utilx.web.filter.risk.validater.RiskControlValidater;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

@@ -2,6 +2,8 @@ package org.lightfw.utilx.web.filter.risk;
 
 import lombok.extern.slf4j.Slf4j;
 import org.lightfw.util.lang.StringUtil;
+import org.lightfw.utilx.web.filter.risk.validater.RiskControlValidateException;
+import org.lightfw.utilx.web.filter.risk.validater.RiskControlValidater;
 import org.lightfw.utilx.web.request.RequestUtil;
 import org.lightfw.utilx.web.request.RequestValueUtil;
 import org.lightfw.utilx.web.request.ResponseUtil;
@@ -26,7 +28,7 @@ public class RiskControlHandler {
     public static void handle(HttpServletRequest request, HttpServletResponse resp) throws IOException {
         //如果验证不通过，直接返回
         try {
-            RiskControlValidater.validate(request, resp);
+            RiskControlValidater.validate(request);
         } catch (RiskControlValidateException e) {
             return;
         }

@@ -33,6 +33,29 @@ public class ReflectUtil {
         }
     }
 
+    /**
+     * 调用方法
+     *
+     * @param object
+     * @param methodName
+     * @param parameters
+     * @return
+     * @throws InvocationTargetException
+     */
+    public static Object invokeMethod(Object object, String methodName, Object[] parameters) {
+        Class<Object>[] parameterTypes = new Class[parameters.length];
+        for (int i = 0; i < parameterTypes.length; i++) {
+            parameterTypes[i] = Object.class;
+        }
+        try {
+            Method method = getDeclaredMethod(object, methodName);
+            method.setAccessible(true);
+            return method.invoke(object, parameters);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw ExceptionUtil.transform(e);
+        }
+    }
+
 
     public static void callSet(Object object, String fieldName, Object value) {
         try {
@@ -110,8 +133,7 @@ public class ReflectUtil {
         for (Class<?> superClass = object.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
             try {
                 return superClass.getDeclaredField(filedName);
-            } catch (NoSuchFieldException e) {
-                // Field 不在当前类定义, 继续向上转型
+            } catch (NoSuchFieldException ignored) {
             }
         }
         return null;
@@ -120,10 +142,18 @@ public class ReflectUtil {
     private static Method getDeclaredMethod(Object object, String methodName, Class<?>[] parameterTypes) {
         for (Class<?> superClass = object.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
             try {
-                // superClass.getMethod(methodName, parameterTypes);
                 return superClass.getDeclaredMethod(methodName, parameterTypes);
-            } catch (NoSuchMethodException e) {
-                // Method 不在当前类定义, 继续向上转型
+            } catch (NoSuchMethodException ignored) {
+            }
+        }
+        return null;
+    }
+
+    private static Method getDeclaredMethod(Object object, String methodName) {
+        Method[] methods = object.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            if (method.getName().equals(methodName)){
+                return method;
             }
         }
         return null;

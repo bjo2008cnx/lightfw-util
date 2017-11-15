@@ -1,6 +1,7 @@
 package org.lightfw.utilx.web.filter.risk;
 
 import lombok.extern.slf4j.Slf4j;
+import org.lightfw.utilx.web.filter.risk.validater.RiskControlValidateException;
 
 /**
  * RiskControlHelper

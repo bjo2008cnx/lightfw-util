@@ -1,4 +1,4 @@
-package org.lightfw.utilx.web.filter.risk;
+package org.lightfw.utilx.web.filter.risk.validater;
 
 /**
  * RiskControlValidateException
