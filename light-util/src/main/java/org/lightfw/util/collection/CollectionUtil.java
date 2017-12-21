@@ -146,7 +146,7 @@ public class CollectionUtil {
      * @param <T> 元素类型
      * @return 集合中唯一的元素
      */
-    public static <T> T getOnlyElement(Collection<T> c,T defaultValue) {
+    public static <T> T getOnlyElement(Collection<T> c, T defaultValue) {
         return Iterators.getOnlyElement(c.iterator(), defaultValue);
     }
 
@@ -186,8 +186,7 @@ public class CollectionUtil {
         List newList = new ArrayList();
         for (Iterator iter = list.iterator(); iter.hasNext(); ) {
             Object element = iter.next();
-            if (set.add(element))
-                newList.add(element);
+            if (set.add(element)) newList.add(element);
         }
         return newList;
     }
@@ -391,7 +390,18 @@ public class CollectionUtil {
         return longs;
     }
 
-    public interface CollectionFilter<T>{
+    public interface CollectionFilter<T> {
         boolean filter(T t);
+    }
+
+    /**
+     * 将唯一对象转换成Collection
+     *
+     * @param o
+     * @param <T>
+     * @return
+     */
+    public <T> Collection<T> toCollection(T o) {
+        return Collections.singleton(o);
     }
 }
