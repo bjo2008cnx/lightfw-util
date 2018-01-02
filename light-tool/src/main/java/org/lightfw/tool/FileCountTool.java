@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class FileCountTool {
 
     public static void main(String[] args) {
-        File file = new File("E:\\codes\\o2o\\");
+        File file = new File("E:\\codes-inf\\soa\\");
         File[] files = file.listFiles();
         Map<AtomicInteger, String> map = new TreeMap(new Comparator<AtomicInteger>() {
             public int compare(AtomicInteger obj1, AtomicInteger obj2) {
