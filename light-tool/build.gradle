@@ -16,7 +16,7 @@ dependencies {
     compileOnly 'com.fasterxml.jackson.core:jackson-databind:2.6.1'
     compileOnly 'com.fasterxml.jackson.core:jackson-annotations:2.6.1'
     compileOnly 'commons-beanutils:commons-beanutils:1.8.0'
-
+    compileOnly 'org.slf4j:slf4j-jdk14:1.7.2'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
