@@ -33,11 +33,11 @@ public class AssertUtil {
         }
     }
 
-    public static void notNull(Object object) {
+    public static void assertNotNull(Object object) {
         assertNotNull(object, "[Assertion failed] - this argument is required; it must not be null");
     }
 
-    public static void hasLength(String text, String message) {
+    public static void assertHasLength(String text, String message) {
         if (!StringUtil.isEmpty(text)) {
             throw new IllegalArgumentException(message);
         }
