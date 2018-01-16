@@ -1,10 +1,10 @@
 package org.lightfw.util.thread;
 
 import lombok.extern.log4j.Log4j2;
-import org.lightfw.util.collection.ArrayUtil;
 import org.lightfw.util.lang.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.*;
@@ -109,7 +109,7 @@ public class ThreadUtil {
      * @throws InterruptedException
      */
     public static <T> void execute(Callable<T>... callables) {
-        Collection<Callable<T>> callList = ArrayUtil.toList(callables);
+        Collection<Callable<T>> callList = Arrays.asList(callables);
         ExecutorService exec = Executors.newFixedThreadPool(2);
 
         try {

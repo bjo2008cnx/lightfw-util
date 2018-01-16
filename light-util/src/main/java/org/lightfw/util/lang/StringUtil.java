@@ -1,6 +1,5 @@
 package org.lightfw.util.lang;
 
-import com.google.common.base.Joiner;
 import org.lightfw.constant.GlobalConstant;
 
 import java.io.UnsupportedEncodingException;
@@ -1007,15 +1006,36 @@ public class StringUtil {
     /**
      * 将任意对象拼成字符串
      *
-     * @param array
-     * @param splitStr
-     * @param <T>
+     * @param objects
+     * @param spliter
      * @return
      */
-    public static <T> String join(T[] array, char splitStr) {
-        return Joiner.on(splitStr).join(array);
+    /**
+     * 将任意对象拼成字符串
+     *
+     * @param objects
+     * @param spliter
+     * @return
+     */
+    public static String join(Object[] objects, char spliter) {
+        StringBuilder sb = new StringBuilder();
+        if (objects == null || objects.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < objects.length; i++) {
+            if (objects[i] == null) {
+                continue;
+            }
+            String obj = objects[i].toString();
+            if (obj != null && obj.length() > 0) {
+                if (sb.length() > 0) {
+                    sb.append(spliter);
+                }
+                sb.append(obj);
+            }
+        }
+        return sb.toString();
     }
-
 
     /**
      * 功能: 得到str的首字母大写
