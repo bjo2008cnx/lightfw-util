@@ -3,7 +3,7 @@ package org.lightfw.tool;
 import third.ChildAccount;
 
 /**
- * BizUtil
+ * 业务工具
  *
  * @author Michael.Wang
  * @date 2017/9/15
