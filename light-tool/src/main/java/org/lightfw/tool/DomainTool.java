@@ -1,7 +1,7 @@
 package org.lightfw.tool;
 
 /**
- * 将所有带_的替换成驼峰风格的
+ * 将所有带_的替换成驼峰风格
  *
  * @author Michael.Wang
  * @date 2017/10/2
