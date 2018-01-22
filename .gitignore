@@ -1,0 +1,23 @@
+#Compile
+*.class
+
+#Mac OS
+.DS_Store
+
+#Package
+*.jar
+*.war
+*.ear
+
+#IntelliJ IDEA
+*.idea
+*.iml
+
+#Eclipse
+.classpath
+.project
+target
+.settings
+
+#Log4j
+logs
