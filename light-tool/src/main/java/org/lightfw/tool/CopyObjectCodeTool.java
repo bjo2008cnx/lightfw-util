@@ -5,7 +5,7 @@ import third.BusinessInfo;
 import java.lang.reflect.Field;
 
 /**
- * 生成对象拷贝代码工具
+ * 生成对象拷贝代码工具集
  *
  * @author Michael.Wang
  * @date 2017/9/15
