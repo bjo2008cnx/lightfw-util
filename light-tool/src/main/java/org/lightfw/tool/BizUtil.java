@@ -1,8 +1,6 @@
 package org.lightfw.tool;
 
-import third.AddSolutionRequestVo;
 import third.ChildAccount;
-import third.MerchantCreateRequestVo;
 
 /**
  * BizUtil
