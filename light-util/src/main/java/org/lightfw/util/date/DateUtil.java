@@ -51,7 +51,7 @@ public class DateUtil {
      * @return
      */
     public static String getDate(Date date, DateFormat dateFormat) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat.toString());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat.getFormat());
         return simpleDateFormat.format(date);
     }
 
