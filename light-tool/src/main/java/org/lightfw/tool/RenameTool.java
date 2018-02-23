@@ -8,7 +8,7 @@ import com.drew.metadata.Tag;
 import org.lightfw.util.date.DateFormat;
 import org.lightfw.util.date.DateUtil;
 import org.lightfw.util.io.common.FileExtUtil;
-import org.lightfw.util.lang.RandomUtil;
+import org.lightfw.util.io.common.FileUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,8 +22,16 @@ import java.util.Iterator;
  * @date 2018/2/23
  */
 public class RenameTool {
+    static String path = "计算机\\iPhone\\Internal Storage\\DCIM\\100APPLE";
+    static String pathNew = "E:\\tmp\\10APPLE_NEW";
+
     public static void main(String[] args) {
-        String path = "E:\\00-baiduclouds\\t";
+        try {
+            File file = new File(pathNew);
+            FileUtil.createParentDirs(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         renameAllInDir(path);
     }
 
@@ -31,7 +39,12 @@ public class RenameTool {
         File dir = new File(path);
         File[] files = dir.listFiles();
         for (File file : files) {
-            renameFile(path, file.getName());
+            try {
+                copyFile(path, file.getName());
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
+            }
         }
     }
 
@@ -41,21 +54,24 @@ public class RenameTool {
      * @param path    文件目录
      * @param oldName 原来的文件名
      */
-    public static void renameFile(String path, String oldName) {
+    public static void copyFile(String path, String oldName) throws IOException {
         String fullPath = path + "/" + oldName;
         File oldFile = new File(fullPath);
         String dateTime = null;
         try {
             dateTime = findTakePhotoTime(oldFile, dateTime);
-        } catch (ImageProcessingException | IOException e) {
+        } catch (Exception e) {
+        }
+        if (dateTime == null) {
             //取创建时间
             Date createTime = FileExtUtil.getCreateTime(fullPath);
             String createTimeStr = DateUtil.getDate(createTime, DateFormat.YYYYMMDDHHMMSS);
-            dateTime = createTimeStr + RandomUtil.randomString(3, true);
+            dateTime = createTimeStr;
         }
 
-        String newName = dateTime + "_" + oldName;
-        File newFile = new File(path + "/" + newName);
+        String newName = dateTime == null ? oldName : dateTime + "_" + oldName;
+        File newFile = new File(pathNew + "/" + newName);
+        FileUtil.copy(oldFile, newFile, true);
         //oldFile.renameTo(newFile);
     }
 

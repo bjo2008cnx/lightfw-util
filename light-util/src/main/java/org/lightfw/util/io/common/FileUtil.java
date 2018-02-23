@@ -3,7 +3,7 @@ package org.lightfw.util.io.common;
 import com.google.common.base.Charsets;
 import com.google.common.collect.TreeTraverser;
 import com.google.common.io.Files;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.lightfw.util.ext.dynamic.RegUtil;
 import org.lightfw.util.ext.io.FileTypeImpl;
 import org.lightfw.util.lang.ExceptionUtil;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Log4j2
+@Slf4j
 public class FileUtil {
 
     /**
