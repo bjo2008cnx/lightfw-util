@@ -39,7 +39,8 @@ public class RenameTool {
         File oldFile = new File(fullPath);
         Date createTime = FileExtUtil.getCreateTime(fullPath);
         String createTimeStr = DateUtil.getDate(createTime, DateFormat.YYYYMMDDHHMMSS);
-        String newName = oldName + "_" + createTimeStr + RandomUtil.randomString(3, true);
+        String dateTime = createTimeStr + RandomUtil.randomString(3, true);
+        String newName = dateTime + "_" + oldName;
         File newFile = new File(path + "/" + newName);
         oldFile.renameTo(newFile);
     }
