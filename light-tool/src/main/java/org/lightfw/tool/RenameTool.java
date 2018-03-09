@@ -22,8 +22,8 @@ import java.util.Iterator;
  * @date 2018/2/23
  */
 public class RenameTool {
-    static String path = "计算机\\iPhone\\Internal Storage\\DCIM\\100APPLE";
-    static String pathNew = "E:\\tmp\\10APPLE_NEW";
+    static String path = "E:\\00-baiduclouds\\DCIM\\相片\\2017嘟嘟";
+    static String pathNew = "E:\\00-baiduclouds\\DCIM\\相片\\2017嘟嘟";
 
     public static void main(String[] args) {
         try {
