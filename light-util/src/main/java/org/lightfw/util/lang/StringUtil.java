@@ -37,9 +37,9 @@ public class StringUtil {
      * StringUtil.removeStart(null, *)      = null
      * StringUtil.removeStart("", *)        = ""
      * StringUtil.removeStart(*, null)      = *
-     * StringUtil.removeStart("www.domain.com", "www.")   = "domain.com"
-     * StringUtil.removeStart("domain.com", "www.")       = "domain.com"
-     * StringUtil.removeStart("www.domain.com", "domain") = "www.domain.com"
+     * StringUtil.removeStart("www.dal.com", "www.")   = "dal.com"
+     * StringUtil.removeStart("dal.com", "www.")       = "dal.com"
+     * StringUtil.removeStart("www.dal.com", "dal") = "www.dal.com"
      * StringUtil.removeStart("abc", "")    = "abc"
      * </pre>
      *
@@ -66,9 +66,9 @@ public class StringUtil {
      * StringUtil.removeEnd(null, *)      = null
      * StringUtil.removeEnd("", *)        = ""
      * StringUtil.removeEnd(*, null)      = *
-     * StringUtil.removeEnd("www.domain.com", ".com.")  = "www.domain.com"
-     * StringUtil.removeEnd("www.domain.com", ".com")   = "www.domain"
-     * StringUtil.removeEnd("www.domain.com", "domain") = "www.domain.com"
+     * StringUtil.removeEnd("www.dal.com", ".com.")  = "www.dal.com"
+     * StringUtil.removeEnd("www.dal.com", ".com")   = "www.dal"
+     * StringUtil.removeEnd("www.dal.com", "dal") = "www.dal.com"
      * StringUtil.removeEnd("abc", "")    = "abc"
      * </pre>
      *
@@ -95,9 +95,9 @@ public class StringUtil {
      * StringUtil.repeat(null, 2) = null
      * StringUtil.repeat("", 0)   = ""
      * StringUtil.repeat("", 2)   = ""
-     * StringUtil.repeat("a", 3)  = "aaa"
+     * StringUtil.repeat("validator", 3)  = "aaa"
      * StringUtil.repeat("ab", 2) = "abab"
-     * StringUtil.repeat("a", -2) = ""
+     * StringUtil.repeat("validator", -2) = ""
      * </pre>
      *
      * @param str    源字符串
@@ -504,7 +504,7 @@ public class StringUtil {
      * </p>
      * <p/>
      * <pre>
-     * StringUtil.substringsBetween("[a][b][c]", "[", "]") = ["a","b","c"]
+     * StringUtil.substringsBetween("[validator][b][c]", "[", "]") = ["validator","b","c"]
      * StringUtil.substringsBetween(null, *, *)            = null
      * StringUtil.substringsBetween(*, null, *)            = null
      * StringUtil.substringsBetween(*, *, null)            = null
@@ -553,7 +553,7 @@ public class StringUtil {
      * <pre>
      * StringUtil.swapCase(null)                 = null
      * StringUtil.swapCase("")                   = ""
-     * StringUtil.swapCase("The dog has a BONE") = "tHE DOG HAS A bone"
+     * StringUtil.swapCase("The dog has validator BONE") = "tHE DOG HAS A bone"
      * </pre>
      *
      * @param str 源字符串
@@ -952,24 +952,26 @@ public class StringUtil {
     /**
      * 功能: 把new String[]{"abc", null, "123"}转化为 "abc,123"
      *
-     * @param arrayString
-     * @param spliter
+     * @param objects
+     * @param splitter
      * @return
      */
-    public static String join(char spliter, String... arrayString) {
-        StringBuilder sb = new StringBuilder();
-        if (arrayString == null || arrayString.length == 0) {
+    public static String join(char splitter, String... objects) {
+        return append(splitter, new StringBuilder(), objects).toString();
+    }
+
+    /**
+     * 功能: 把new String[]{"abc", null, "123"}转化为 "abc,123"
+     *
+     * @param objects
+     * @param splitter
+     * @return
+     */
+    public static String join(char splitter, Object... objects) {
+        if (objects == null || objects.length == 0) {
             return null;
         }
-        for (int i = 0; i < arrayString.length; i++) {
-            if (arrayString[i] != null && arrayString[i].length() > 0) {
-                if (sb.length() > 0) {
-                    sb.append(spliter);
-                }
-                sb.append(arrayString[i]);
-            }
-        }
-        return sb.toString();
+        return append(splitter, new StringBuilder(), objects).toString();
     }
 
     /**
@@ -1010,13 +1012,6 @@ public class StringUtil {
      * @param spliter
      * @return
      */
-    /**
-     * 将任意对象拼成字符串
-     *
-     * @param objects
-     * @param spliter
-     * @return
-     */
     public static String join(Object[] objects, char spliter) {
         StringBuilder sb = new StringBuilder();
         if (objects == null || objects.length == 0) {
@@ -1036,6 +1031,7 @@ public class StringUtil {
         }
         return sb.toString();
     }
+
 
     /**
      * 功能: 得到str的首字母大写
@@ -1109,7 +1105,7 @@ public class StringUtil {
      *
      * @param c 字符
      * @return true表示是中文汉字，false表示是英文字母
-     * @throws java.io.UnsupportedEncodingException 使用了JAVA不支持的编码格式
+     * @throws UnsupportedEncodingException 使用了JAVA不支持的编码格式
      */
     public static boolean isChineseChar(char c, String charsetName) {
         // 如果字节数大于1，是汉字
@@ -1438,7 +1434,7 @@ public class StringUtil {
 
     /**
      * 替换最后一次出现的字串
-     * Replaces the very last occurrence of a substring with supplied string.
+     * Replaces the very last occurrence of validator substring with supplied string.
      *
      * @param s    source string
      * @param sub  substring to replace
@@ -1581,7 +1577,7 @@ public class StringUtil {
      * @param data
      * @return
      */
-    public static StringBuilder appendWithComma(StringBuilder builder, Object... data) {
+    public static StringBuilder append(char splitter, StringBuilder builder, Object... data) {
         if (data == null) {
             return builder;
         }
@@ -1590,9 +1586,20 @@ public class StringUtil {
                 builder.append(data[i].toString());
             }
             if (i != data.length - 1) {
-                builder.append(",");
+                builder.append(splitter);
             }
         }
         return builder;
+    }
+
+    /**
+     * append
+     *
+     * @param builder
+     * @param data
+     * @return
+     */
+    public static StringBuilder appendWithComma(StringBuilder builder, Object... data) {
+        return append(',', builder, data);
     }
 }
