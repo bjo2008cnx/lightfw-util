@@ -1554,4 +1554,45 @@ public class StringUtil {
     public static String quote(String str) {
         return "\"".concat(str).concat("\"");
     }
+
+    /**
+     * append
+     *
+     * @param builder
+     * @param data
+     * @return
+     */
+    public static StringBuilder append(StringBuilder builder, Object... data) {
+        if (data == null) {
+            return builder;
+        }
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] != null) {
+                builder.append(data[i].toString());
+            }
+        }
+        return builder;
+    }
+
+    /**
+     * append
+     *
+     * @param builder
+     * @param data
+     * @return
+     */
+    public static StringBuilder appendWithComma(StringBuilder builder, Object... data) {
+        if (data == null) {
+            return builder;
+        }
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] != null) {
+                builder.append(data[i].toString());
+            }
+            if (i != data.length - 1) {
+                builder.append(",");
+            }
+        }
+        return builder;
+    }
 }
