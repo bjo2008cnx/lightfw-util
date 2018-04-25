@@ -1593,7 +1593,7 @@ public class StringUtil {
     }
 
     /**
-     * append
+     * 拼接对象，以分隔符进行分隔
      *
      * @param builder
      * @param data
@@ -1601,5 +1601,28 @@ public class StringUtil {
      */
     public static StringBuilder appendWithComma(StringBuilder builder, Object... data) {
         return append(',', builder, data);
+    }
+
+    /**
+     * 拼接成对的字符串。如joinPart("name","zhangsan","age",1) 则输出 name:zhangsan, age:1
+     *
+     * @param objects
+     * @return
+     */
+    public static String joinPairs(Object... objects) {
+        if (objects == null || objects.length % 2 != 0) {
+            return "";
+        }
+        StringBuilder builder = new StringBuilder();
+        int count = objects.length / 2;
+        for (int i = 0; i < count; i++) {
+            Object key = objects[i * 2];
+            Object value = objects[i * 2 + 1];
+            builder.append(key).append(":").append(value);
+            if (i != count - 1) {
+                builder.append(",");
+            }
+        }
+        return builder.toString();
     }
 }
