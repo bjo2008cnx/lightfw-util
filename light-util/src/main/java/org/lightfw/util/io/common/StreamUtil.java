@@ -11,6 +11,25 @@ import java.io.*;
  */
 @Slf4j
 public class StreamUtil {
+    /**
+     * 通用的关闭方法
+     *
+     * @param autoCloseables
+     */
+    public static void close(final AutoCloseable... autoCloseables) {
+        if (autoCloseables == null) {
+            return;
+        }
+        for (AutoCloseable closeable : autoCloseables) {
+            try {
+                if (closeable != null) {
+                    closeable.close();
+                }
+            } catch (Throwable e) {
+                log.error("fail to close.", e);
+            }
+        }
+    }
 
     /**
      * 通用的关闭方法

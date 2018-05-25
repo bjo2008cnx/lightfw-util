@@ -26,6 +26,7 @@ public class StringUtil {
     private static final int PAD_LIMIT = 8192;
 
     public static final char UNDERLINE = '_';
+    private static final String DEFAULT_ENCODING = GlobalConstant.CharSets.DEFAULT_ENCODING;
 
 
     /**
@@ -1522,7 +1523,7 @@ public class StringUtil {
     public String bytesToString(byte[] bytes) {
         // 错误写法，依赖于平台的默认字符集，换个平台可能就是乱码 : return new String(bytes);
         try {
-            return new String(bytes, GlobalConstant.CharSets.DEFAULT_ENCODING);
+            return new String(bytes, DEFAULT_ENCODING);
         } catch (UnsupportedEncodingException e) {
             throw ExceptionUtil.transform(e);
         }
@@ -1535,7 +1536,7 @@ public class StringUtil {
         // 错误写法，依赖于平台的默认字符集，换个平台得到的字节数组可能就不正确了: return content.getBytes();
         // 正确写法
         try {
-            return content.getBytes(GlobalConstant.CharSets.DEFAULT_ENCODING);
+            return content.getBytes(DEFAULT_ENCODING);
         } catch (UnsupportedEncodingException e) {
             throw ExceptionUtil.transform(e);
         }
