@@ -1,5 +1,6 @@
 package org.lightfw.util.lang;
 
+
 import org.lightfw.constant.GlobalConstant;
 
 import java.io.UnsupportedEncodingException;
@@ -711,7 +712,7 @@ public class StringUtil {
         if (chkStr == null) {
             return true;
         } else {
-            return "".equals(chkStr.trim()) ? true : false;
+            return "".equals(chkStr.trim());
         }
     }
 
@@ -958,7 +959,7 @@ public class StringUtil {
      * @return
      */
     public static String join(char splitter, String... objects) {
-        return append(splitter, new StringBuilder(), objects).toString();
+        return join(objects, splitter);
     }
 
     /**
@@ -969,10 +970,7 @@ public class StringUtil {
      * @return
      */
     public static String join(char splitter, Object... objects) {
-        if (objects == null || objects.length == 0) {
-            return null;
-        }
-        return append(splitter, new StringBuilder(), objects).toString();
+        return join(objects, splitter);
     }
 
     /**
@@ -1350,15 +1348,61 @@ public class StringUtil {
     }
 
     /**
-     * 判断字符串是否数字
+     * 判断字符串是否为数字
+     * <pre>
+     * StringUtils.isNumeric(null)   = false
+     * StringUtils.isNumeric("")     = true
+     * StringUtils.isNumeric("  ")   = false
+     * StringUtils.isNumeric("123")  = true
+     * StringUtils.isNumeric("12 3") = false
+     * StringUtils.isNumeric("ab2c") = false
+     * StringUtils.isNumeric("12-3") = false
+     * StringUtils.isNumeric("12.3") = false
+     * </pre>
      *
-     * @param str
-     * @return
+     * @param str 字符串
+     * @return boolean
      */
     public static boolean isNumeric(String str) {
-        Pattern pattern = Pattern.compile("[0-9]*");
-        Matcher isNum = pattern.matcher(str);
-        return isNum.matches() ? true : false;
+        if (str == null) {
+            return false;
+        }
+        int sz = str.length();
+        for (int i = 0; i < sz; i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 判断字符串是否严格是数字，
+     * <pre>
+     * StringUtils.isNumeric(null)   = false
+     * StringUtils.isNumeric("")     = false
+     * StringUtils.isNumeric("  ")   = false
+     * StringUtils.isNumeric("123")  = true
+     * StringUtils.isNumeric("12 3") = false
+     * StringUtils.isNumeric("ab2c") = false
+     * StringUtils.isNumeric("12-3") = false
+     * StringUtils.isNumeric("12.3") = false
+     * </pre>
+     *
+     * @param str 字符串
+     * @return boolean
+     */
+    public static boolean isNumericStrict(String str) {
+        if (isNullOrEmpty(str)) {
+            return false;
+        }
+        int sz = str.length();
+        for (int i = 0; i < sz; i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -1578,9 +1622,12 @@ public class StringUtil {
      * @param data
      * @return
      */
-    public static StringBuilder append(char splitter, StringBuilder builder, Object... data) {
+    public static StringBuilder append(Object splitter, StringBuilder builder, Object... data) {
         if (data == null) {
             return builder;
+        }
+        if (builder == null) {
+            builder = new StringBuilder();
         }
         for (int i = 0; i < data.length; i++) {
             if (data[i] != null) {
@@ -1594,7 +1641,24 @@ public class StringUtil {
     }
 
     /**
-     * 拼接对象，以分隔符进行分隔
+     * append
+     *
+     * @param data
+     * @return
+     */
+    public static StringBuilder append(char splitter, Object... data) {
+        return append(splitter, null, data);
+    }
+
+    /**
+     * join With String
+     */
+    public static String joinWithString(String splitter, Object... data) {
+        return append(splitter, null, data).toString();
+    }
+
+    /**
+     * append
      *
      * @param builder
      * @param data
