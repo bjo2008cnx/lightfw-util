@@ -3,60 +3,71 @@ package org.lightfw.util.system;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 /**
  * 网络工具
  */
-public abstract class LocalAddressUtil {
+public class LocalAddressUtil {
 
     /**
-     * 预先加载
+     * 获取本地ip
+     * @return
      */
-    public static InetAddress localAddress;
-
-    static {
+    public static String getLocalIp() {
+        String ip;
         try {
-            localAddress = getLocalInetAddress();
-        } catch (SocketException e) {
-            throw new RuntimeException("fail to get local ip.");
+            ip = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException ignore) {
+            ip = null;
         }
+        return ip;
     }
+
+    /**
+     * 获取本地host name
+     * @return
+     */
+    public static String getLocalHostName() {
+        String hostName;
+        try {
+            hostName = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException ignore) {
+            hostName = "";
+        }
+        return hostName;
+    }
+
 
     /**
      * 获取第一个IP地址
      *
      * @return 第一个IP地址
-     * @throws java.net.SocketException 网络异常
+     * @throws SocketException 网络异常
      */
-    public static InetAddress getLocalInetAddress() throws SocketException {
-        // enumerates all network interfaces
-        Enumeration<NetworkInterface> enu = NetworkInterface.getNetworkInterfaces();
-        while (enu.hasMoreElements()) {
-            NetworkInterface ni = enu.nextElement();
-            if (ni.isLoopback()) {
-                continue;
-            }
-            Enumeration<InetAddress> addressEnumeration = ni.getInetAddresses();
-            while (addressEnumeration.hasMoreElements()) {
-                InetAddress address = addressEnumeration.nextElement();
-                // ignores all invalidated addresses
-                if (address.isLinkLocalAddress() || address.isLoopbackAddress() || address.isAnyLocalAddress()) {
+    public static InetAddress getLocalInetAddress() {
+        try {
+            //取全部网络接口
+            Enumeration<NetworkInterface> enu = NetworkInterface.getNetworkInterfaces();
+            while (enu.hasMoreElements()) {
+                NetworkInterface ni = enu.nextElement();
+                if (ni.isLoopback()) {
                     continue;
                 }
-                return address;
+                Enumeration<InetAddress> addressEnumeration = ni.getInetAddresses();
+                while (addressEnumeration.hasMoreElements()) {
+                    InetAddress address = addressEnumeration.nextElement();
+                    // ignores all invalidated addresses
+                    if (address.isLinkLocalAddress() || address.isLoopbackAddress() || address.isAnyLocalAddress()) {
+                        continue;
+                    }
+                    return address;
+                }
             }
+        } catch (SocketException ignore) {
         }
-        throw new RuntimeException("No validated local address!");
-    }
-
-    /**
-     * 获取IP
-     *
-     * @return IP地址
-     */
-    public static String getLocalAddress() {
-        return localAddress.getHostAddress();
+        return null;
     }
 
     /**
@@ -64,8 +75,13 @@ public abstract class LocalAddressUtil {
      *
      * @return the string local address
      */
-    public static String getLocalAddressParts() {
-        String address = localAddress.getHostAddress();
+
+    public static String getLocalAddressParts() throws SocketException {
+        String address = getLocalInetAddress().getHostAddress();
+        if (address == null) {
+            return "";
+        }
+
         String[] parts = address.split("\\.");
         String second;
         String fourth;
