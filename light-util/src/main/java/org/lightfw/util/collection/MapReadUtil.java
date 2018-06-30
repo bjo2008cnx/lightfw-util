@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * MapReadUtil
+ * Map 读取工具类
  *
  * @author Michael.Wang
  * @date 2017/10/31

@@ -2,6 +2,7 @@ package org.lightfw.constant;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -11,6 +12,10 @@ import java.util.Set;
  * @date 2016/5/7
  */
 public interface GlobalConstant {
+
+    interface Defaults {
+        String DEFAULT_ENCODING = CharSets.UTF8;
+    }
 
     /**
      * 字符集
@@ -23,24 +28,24 @@ public interface GlobalConstant {
         String UTF16 = "UTF-16";
         String UNICODE = "UNICODE";
         String ISO88591 = "ISO-8859-1";
-        String DEFAULT_ENCODING = UTF8;
+
     }
 
     /**
      * 默认空集合
      */
     interface Collections {
-        List EMPTY_LIST = Collections.EMPTY_LIST; //不可变列表，用于返回空列表的场景
-        Map EMPTY_MAP = Collections.EMPTY_MAP; //不可变Map，用于返回空Map的场景
-        Set EMPTY_SET = Collections.EMPTY_SET; //不可变Set，用于返回空Set的场景
+        List EMPTY_LIST = Collections.EMPTY_LIST;
+        Map EMPTY_MAP = Collections.EMPTY_MAP;
+        Set EMPTY_SET = Collections.EMPTY_SET;
+        Properties EMPTY_PROPERTIES = new Properties();
     }
 
     /**
      * 默认异常
      */
     interface Exceptions {
-        RuntimeException TODO = new RuntimeException("TODO");
-        IllegalArgumentException ARGUMENT_EMPTY = new IllegalArgumentException("Parameter cannot be null");
+        RuntimeException TODO_EXCEPTION = new UnsupportedOperationException();
     }
 
     /**
