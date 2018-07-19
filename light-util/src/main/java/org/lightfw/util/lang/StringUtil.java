@@ -27,7 +27,7 @@ public class StringUtil {
     private static final int PAD_LIMIT = 8192;
 
     public static final char UNDERLINE = '_';
-    private static final String DEFAULT_ENCODING = GlobalConstant.CharSets.DEFAULT_ENCODING;
+    private static final String DEFAULT_ENCODING = GlobalConstant.Defaults.DEFAULT_ENCODING;
 
     // 用于驼峰转下划线
     private static Pattern linePattern = Pattern.compile("_(\\w)");

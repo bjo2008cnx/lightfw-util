@@ -85,7 +85,7 @@ public class CollectionUtil {
      * @return
      */
     public static Collection transform() {
-        throw GlobalConstant.Exceptions.TODO;
+        throw GlobalConstant.Exceptions.TODO_EXCEPTION;
     }
 
     /**

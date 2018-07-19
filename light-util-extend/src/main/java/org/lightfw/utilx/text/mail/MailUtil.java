@@ -15,7 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 public class MailUtil {
-    public static String DEFAULT_MAIL_ENCODING = GlobalConstant.CharSets.DEFAULT_ENCODING;
+    public static String DEFAULT_MAIL_ENCODING = GlobalConstant.Defaults.DEFAULT_ENCODING;
 
     private String mailSmtpHost;
     private String sendMailUser;

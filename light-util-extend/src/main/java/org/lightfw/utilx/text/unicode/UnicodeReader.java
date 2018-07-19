@@ -84,7 +84,7 @@ public class UnicodeReader extends Reader {
             unread = n - 4;
         } else if ((bom[0] == (byte) 0xEF) && (bom[1] == (byte) 0xBB) &&
                 (bom[2] == (byte) 0xBF)) {
-            encoding = GlobalConstant.CharSets.DEFAULT_ENCODING;
+            encoding = GlobalConstant.Defaults.DEFAULT_ENCODING;
             unread = n - 3;
         } else if ((bom[0] == (byte) 0xFE) && (bom[1] == (byte) 0xFF)) {
             encoding = "UTF-16BE";

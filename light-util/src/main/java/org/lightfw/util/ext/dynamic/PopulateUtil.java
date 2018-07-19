@@ -2,7 +2,7 @@ package org.lightfw.util.ext.dynamic;
 
 import lombok.extern.slf4j.Slf4j;
 import org.lightfw.util.lang.ExceptionUtil;
-import org.lightfw.util.text.StringExtUtil;
+import org.lightfw.util.lang.StringUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -89,7 +89,7 @@ public class PopulateUtil {
                 String fieldName = field.getName();
                 String propName = fieldName;
                 if (convertToCamel){
-                    propName= StringExtUtil.camelToUnderLine(fieldName);
+                    propName= StringUtil.camelToUnderLine(fieldName);
                 }
                 Object value = map.get(propName);
                 field.set(obj, value);
