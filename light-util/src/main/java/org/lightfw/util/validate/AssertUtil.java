@@ -11,7 +11,25 @@ import java.util.Map;
 public class AssertUtil {
 
     /**
-     * 表达式必须不为null,否则抛出异常。自动检测object的类型，如果是String，将判断是否为null或者"".如果是Collection或Map,将判断其size
+     * 表达式必须为非null,否则抛出异常。自动检测object的类型，如果是String，将判断是否为null或者"".如果是Collection或Map,将判断其size
+     * 使用示例：assertNotNullOrEmpty(key, "key");如果key为空，则抛出IllegalArgumentException（"key cannot be null or empty"）
+     *
+     * @param object 待校验的对象
+     */
+    public static void assertNotEmpty(Object object, String messageKey) {
+        assertNotNullOrEmpty(object, messageKey);
+    }
+
+    public static void assertNotEmpty(Object object, String messageKey, Object object2, String messageKey2) {
+        assertNotNullOrEmpty(object, messageKey, object2, messageKey2);
+    }
+
+    public static void assertNotEmpty(Object object, String messageKey, Object object2, String messageKey2, Object object3, String messageKey3) {
+        assertNotNullOrEmpty(object, messageKey, object2, messageKey2, object3, messageKey3);
+    }
+
+    /**
+     * 表达式必须为非null,否则抛出异常。自动检测object的类型，如果是String，将判断是否为null或者"".如果是Collection或Map,将判断其size
      * 使用示例：assertNotNullOrEmpty(key, "key");如果key为空，则抛出IllegalArgumentException（"key cannot be null or empty"）
      *
      * @param object 待校验的对象
