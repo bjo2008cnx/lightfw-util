@@ -19,17 +19,7 @@ public class Md5Util {
 
     protected static char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
-    protected static MessageDigest messagedigest = null;
-
     public static final String MD5 = "MD5";
-
-    static {
-        try {
-            messagedigest = MessageDigest.getInstance(MD5);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     /**
      * 功能：加盐版的MD5.返回格式为MD5(密码+{盐值})
@@ -63,9 +53,13 @@ public class Md5Util {
             FileInputStream in = new FileInputStream(file);
             FileChannel ch = in.getChannel();
             MappedByteBuffer byteBuffer = ch.map(FileChannel.MapMode.READ_ONLY, 0, file.length());
+            MessageDigest messagedigest = MessageDigest.getInstance(MD5);
             messagedigest.update(byteBuffer);
             return bufferToHex(messagedigest.digest());
         } catch (IOException e) {
+            log.error("fail to get file md5", e);
+            return "";
+        } catch (NoSuchAlgorithmException e) {
             log.error("fail to get file md5", e);
             return "";
         }
@@ -82,8 +76,15 @@ public class Md5Util {
     }
 
     private static String getMD5String(byte[] bytes) {
-        messagedigest.update(bytes);
-        return bufferToHex(messagedigest.digest());
+        MessageDigest messagedigest = null;
+        try {
+            messagedigest = MessageDigest.getInstance(MD5);
+            messagedigest.update(bytes);
+            return bufferToHex(messagedigest.digest());
+        } catch (NoSuchAlgorithmException e) {
+            log.error("", e);
+            throw new RuntimeException(e);
+        }
     }
 
     private static String bufferToHex(byte bytes[]) {
