@@ -30,4 +30,19 @@ public class PopulateUtilTest {
         Assert.assertEquals(Boolean.TRUE, config.getIsClosable());
         Assert.assertEquals(Boolean.TRUE, config.isSwitchOn());
     }
+
+    @Test
+    public void map2Obj_prefix() throws Exception {
+        Map map = new Properties();
+        map.put("common.app_id", "1234");
+        map.put("common.to_auth_url", "http://123.com");
+        map.put("common.is_closable", "true");
+        map.put("common.is_switch_on", "true");
+        map.put("common.count", "100");
+        AuthConfig config = PopulateUtil.map2Obj(map, AuthConfig.class,"common.");
+        Assert.assertEquals(1234, config.getAppId());
+        Assert.assertEquals("http://123.com", config.getToAuthUrl());
+        Assert.assertEquals(Boolean.TRUE, config.getIsClosable());
+        Assert.assertEquals(Boolean.TRUE, config.isSwitchOn());
+    }
 }
