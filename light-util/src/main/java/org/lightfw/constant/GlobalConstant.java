@@ -56,5 +56,7 @@ public interface GlobalConstant {
         int FALSE_INT = 0;
         String TRUE_STR = String.valueOf(TRUE_INT);
         String FALSE_STR = String.valueOf(FALSE_INT);
+
+        String TRUE_CHAR = "true";
     }
 }

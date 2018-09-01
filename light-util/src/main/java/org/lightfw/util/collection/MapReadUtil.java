@@ -16,13 +16,60 @@ import java.util.Map;
  */
 public class MapReadUtil {
 
+    /**
+     * 获取属性
+     *
+     * @param map
+     * @param attr
+     * @param <T>
+     * @return
+     */
     public static <T> T get(Map map, String attr) {
         return (T) (map.get(attr));
     }
 
+    /**
+     * 获取属性，给出默认值
+     *
+     * @param map
+     * @param attr
+     * @param defaultValue
+     * @param <T>
+     * @return
+     */
     public static <T> T get(Map map, String attr, Object defaultValue) {
         Object result = map.get(attr);
         return (T) (result != null ? result : defaultValue);
+    }
+
+
+    /**
+     * 获取属性
+     *
+     * @param map
+     * @param attr
+     * @param <T>s
+     * @returnss
+     */
+    public static Object get(Map map, String attr, Class targetType) {
+        switch (targetType.getName()) {
+            case "java.lang.String":
+                return getStr(map, attr);
+            case "int":
+                return getInt(map, attr);
+            case "java.lang.Integer":
+                return getInt(map, attr);
+            case "long":
+                return getLong(map, attr);
+            case "java.lang.Long":
+                return getLong(map, attr);
+            case "boolean":
+                return getBoolean(map, attr);
+            case "java.lang.Boolean":
+                return getBoolean(map, attr);
+            default:
+                return get(map, attr);
+        }
     }
 
     public static String getStr(Map map, String attr) {
@@ -81,7 +128,7 @@ public class MapReadUtil {
         if (prop instanceof Boolean) {
             return (Boolean) map.get(attr);
         } else if (prop instanceof String) {
-            return GlobalConstant.Booleans.TRUE_STR.equals(prop);
+            return GlobalConstant.Booleans.TRUE_STR.equals(prop) || GlobalConstant.Booleans.TRUE_CHAR.equals(prop);
         } else if (prop instanceof Integer) {
             return Integer.valueOf(GlobalConstant.Booleans.TRUE_INT).equals(prop);
         }

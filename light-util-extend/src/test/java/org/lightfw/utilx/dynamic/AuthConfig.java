@@ -12,10 +12,10 @@ import lombok.Data;
 @Data
 public class AuthConfig {
 
-    private String appId;
+    private int appId;
     private String toAuthUrl;
-    private String alipayGateWay;
-    private String alipayPublicKey;
-    private String appPrivateKey;
+    private boolean isSwitchOn;
+    private Boolean isClosable;
+    private Integer count;
 
 }

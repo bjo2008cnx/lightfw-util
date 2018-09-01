@@ -1,6 +1,7 @@
 package org.lightfw.util.ext.dynamic;
 
 import lombok.extern.slf4j.Slf4j;
+import org.lightfw.util.collection.MapReadUtil;
 import org.lightfw.util.lang.ExceptionUtil;
 import org.lightfw.util.lang.StringUtil;
 
@@ -106,12 +107,11 @@ public class PopulateUtil {
         try {
             String fieldName = field.getName();
             String propName = convertToCamel ? StringUtil.camelToUnderLine(fieldName) : fieldName;
-            Object value = map.get(propName);
+            Object value = MapReadUtil.get(map, propName, field.getType());
             field.set(obj, value);
         } catch (IllegalAccessException e) {
             log.error("fail to set field", e);
         }
         field.setAccessible(false);
     }
-
 }

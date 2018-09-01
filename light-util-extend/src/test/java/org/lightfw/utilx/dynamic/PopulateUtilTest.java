@@ -21,8 +21,13 @@ public class PopulateUtilTest {
         Map map = new Properties();
         map.put("app_id", "1234");
         map.put("to_auth_url", "http://123.com");
+        map.put("is_closable", "true");
+        map.put("is_switch_on", "true");
+        map.put("count", "100");
         AuthConfig config = PopulateUtil.map2Obj(map, AuthConfig.class);
-        Assert.assertEquals("1234", config.getAppId());
+        Assert.assertEquals(1234, config.getAppId());
         Assert.assertEquals("http://123.com", config.getToAuthUrl());
+        Assert.assertEquals(Boolean.TRUE, config.getIsClosable());
+        Assert.assertEquals(Boolean.TRUE, config.isSwitchOn());
     }
 }
