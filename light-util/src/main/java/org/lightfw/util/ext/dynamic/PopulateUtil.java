@@ -23,7 +23,19 @@ public class PopulateUtil {
      * @throws Exception
      */
     public static <T> T map2Obj(Map<String, Object> map, Class<T> clz) {
-        return map2Obj(map, clz, true);
+        return map2Obj(map, clz, true, null);
+    }
+
+    /**
+     * Map 转成Object, 属性名转换为驼峰风格
+     *
+     * @param map
+     * @param clz
+     * @return
+     * @throws Exception
+     */
+    public static <T> T map2Obj(Map<String, Object> map, Class<T> clz, String prefix) {
+        return map2Obj(map, clz, true, prefix);
     }
 
     /**
@@ -34,7 +46,7 @@ public class PopulateUtil {
      * @return
      * @throws Exception
      */
-    public static <T> T map2Obj(Map<String, Object> map, Class<T> clz, boolean convertToCamel) {
+    public static <T> T map2Obj(Map<String, Object> map, Class<T> clz, boolean convertToCamel, String prefix) {
         T obj;
         try {
             obj = clz.newInstance();
@@ -47,7 +59,7 @@ public class PopulateUtil {
             if (Modifier.isStatic(mod) || Modifier.isFinal(mod)) {
                 continue;
             }
-            writeField(map, convertToCamel, obj, field);
+            writeField(map, convertToCamel, obj, field, prefix);
         }
         return obj;
     }
@@ -76,17 +88,22 @@ public class PopulateUtil {
     /**
      * 给field赋值，主要解决驼峰风格问题和类型转换问题
      *
+     * @param <T>
      * @param map
      * @param convertToCamel
      * @param obj
      * @param field
-     * @param <T>
+     * @param prefix
      */
-    private static <T> void writeField(Map<String, Object> map, boolean convertToCamel, T obj, Field field) {
+    private static <T> void writeField(Map<String, Object> map, boolean convertToCamel, T obj, Field field, String prefix) {
         field.setAccessible(true);
         try {
             String fieldName = field.getName();
+
+            //如果是驼峰风格，转成下画线
             String propName = convertToCamel ? StringUtil.camelToUnderLine(fieldName) : fieldName;
+            //如果有前缀，加前缀。如：类中的field 为paassword, map中的key为: jdbc:password
+            propName = StringUtil.isNotEmpty(prefix) ? prefix + propName : propName;
             Object value = MapReadUtil.get(map, propName, field.getType());
             field.set(obj, value);
         } catch (IllegalAccessException e) {
@@ -94,5 +111,4 @@ public class PopulateUtil {
         }
         field.setAccessible(false);
     }
-
 }

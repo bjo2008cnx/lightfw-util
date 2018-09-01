@@ -1,5 +1,6 @@
 package org.lightfw.util.db;
 
+import org.lightfw.util.io.common.StreamUtil;
 import org.lightfw.util.lang.ExceptionUtil;
 
 import java.sql.*;
@@ -69,12 +70,12 @@ public class MetaDataUtil {
                 if (rsPk.next()) {
                     pks.put(tableName, rsPk.getString(4));
                 }
-                JDBCUtil.close(rsPk);
+                StreamUtil.close(rsPk);
             }
         } catch (SQLException e) {
             throw ExceptionUtil.transform(e);
         } finally {
-            JDBCUtil.close(rs);
+            StreamUtil.close(rs);
         }
     }
 
