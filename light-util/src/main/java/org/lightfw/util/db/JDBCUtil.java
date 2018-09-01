@@ -1,9 +1,11 @@
 package org.lightfw.util.db;
 
-import com.google.common.base.Throwables;
+import org.lightfw.util.io.common.StreamUtil;
 import org.lightfw.util.lang.ExceptionUtil;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 数据库工具类
@@ -12,50 +14,6 @@ import java.sql.*;
  * @date 2016/5/10
  */
 public class JDBCUtil {
-    /**
-     * 关闭连接
-     *
-     * @param conn
-     */
-    public static void close(Connection conn) {
-        try {
-            if (conn != null && !conn.isClosed()) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            Throwables.propagateIfPossible(e);
-        }
-    }
-
-    /**
-     * 关闭语句
-     *
-     * @param stmt
-     */
-    public static void close(Statement stmt) {
-        try {
-            if (stmt != null && !stmt.isClosed()) {
-                stmt.close();
-            }
-        } catch (SQLException e) {
-            Throwables.propagateIfPossible(e);
-        }
-    }
-
-    /**
-     * 关闭结果集
-     *
-     * @param rs
-     */
-    public static void close(ResultSet rs) {
-        try {
-            if (rs != null && !rs.isClosed()) {
-                rs.close();
-            }
-        } catch (SQLException e) {
-            Throwables.propagateIfPossible(e);
-        }
-    }
 
     /**
      * 静态SQL模式，新增记录并获取新增记录的主键
@@ -75,8 +33,28 @@ public class JDBCUtil {
         } catch (SQLException e) {
             throw ExceptionUtil.transform(e);
         } finally {
-            close(rs);
-            close(pstmt);
+            StreamUtil.close(rs);
+            StreamUtil.close(pstmt);
+        }
+    }
+
+    /**
+     * 将rs数据拷贝到map
+     */
+    public static void populate(Map map, ResultSet rs) {
+        if (map == null) {
+            map = new HashMap();
+        }
+        try {
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int count = rsmd.getColumnCount();
+            for (int i = 1; i <= count; i++) {
+                String key = rsmd.getColumnLabel(i);
+                String value = rs.getString(i);
+                map.put(key.toLowerCase(), value);
+            }
+        } catch (SQLException e) {
+            throw ExceptionUtil.transform(e);
         }
     }
 }

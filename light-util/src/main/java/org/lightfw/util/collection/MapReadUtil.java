@@ -48,7 +48,6 @@ public class MapReadUtil {
      *
      * @param map
      * @param attr
-     * @param <T>s
      * @returnss
      */
     public static Object get(Map map, String attr, Class targetType) {
