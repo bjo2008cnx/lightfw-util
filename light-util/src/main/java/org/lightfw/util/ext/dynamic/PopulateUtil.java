@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 对象拷贝工具
+ */
 @Slf4j
 public class PopulateUtil {
     /**
@@ -59,8 +62,8 @@ public class PopulateUtil {
      * @return
      * @throws Exception
      */
-    public static <T> T map2Obj(Map<String, Object> map, Class<T> clz){
-        return map2Obj(map,clz,true);
+    public static <T> T map2Obj(Map<String, Object> map, Class<T> clz) {
+        return map2Obj(map, clz, true);
     }
 
     /**
@@ -84,21 +87,31 @@ public class PopulateUtil {
             if (Modifier.isStatic(mod) || Modifier.isFinal(mod)) {
                 continue;
             }
-            field.setAccessible(true);
-            try {
-                String fieldName = field.getName();
-                String propName = fieldName;
-                if (convertToCamel){
-                    propName= StringUtil.camelToUnderLine(fieldName);
-                }
-                Object value = map.get(propName);
-                field.set(obj, value);
-            } catch (IllegalAccessException e) {
-                log.error("fail to set field", e);
-            }
-            field.setAccessible(false);
+            writeField(map, convertToCamel, obj, field);
         }
         return obj;
+    }
+
+    /**
+     * 给field赋值，主要解决驼峰风格问题和类型转换问题
+     *
+     * @param map
+     * @param convertToCamel
+     * @param obj
+     * @param field
+     * @param <T>
+     */
+    private static <T> void writeField(Map<String, Object> map, boolean convertToCamel, T obj, Field field) {
+        field.setAccessible(true);
+        try {
+            String fieldName = field.getName();
+            String propName = convertToCamel ? StringUtil.camelToUnderLine(fieldName) : fieldName;
+            Object value = map.get(propName);
+            field.set(obj, value);
+        } catch (IllegalAccessException e) {
+            log.error("fail to set field", e);
+        }
+        field.setAccessible(false);
     }
 
 }
