@@ -14,24 +14,6 @@ import java.util.Map;
  */
 @Slf4j
 public class PopulateUtil {
-
-    /**
-     * 对象转成Map
-     *
-     * @param obj
-     * @return
-     * @throws Exception
-     */
-    public static Map<String, Object> Obj2Map(Object obj) throws Exception {
-        Map<String, Object> map = new HashMap();
-        Field[] fields = obj.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            field.setAccessible(true);
-            map.put(field.getName(), field.get(obj));
-        }
-        return map;
-    }
-
     /**
      * Map 转成Object, 属性名转换为驼峰风格
      *
@@ -71,6 +53,27 @@ public class PopulateUtil {
     }
 
     /**
+     * 对象转成Map
+     *
+     * @param obj
+     * @return
+     * @throws Exception
+     */
+    public static Map<String, Object> Obj2Map(Object obj) {
+        Map<String, Object> map = new HashMap();
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            try {
+                map.put(field.getName(), field.get(obj));
+            } catch (IllegalAccessException e) {
+                log.warn("fail to convert {}", field.getName(), e);
+            }
+        }
+        return map;
+    }
+
+    /**
      * 给field赋值，主要解决驼峰风格问题和类型转换问题
      *
      * @param map
@@ -91,4 +94,5 @@ public class PopulateUtil {
         }
         field.setAccessible(false);
     }
+
 }
